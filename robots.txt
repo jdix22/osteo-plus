@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://jdix22.github.io/osteo-plus/sitemap.xml

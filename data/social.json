@@ -1,0 +1,6 @@
+{
+ "note": "Paste each network's Behold feed ID (the code at the end of https://feeds.behold.so/XXXX) to replace the placeholder posts with live ones. Edit from /admin/ > Social feeds.",
+ "instagram": { "behold": "", "count": 8 },
+ "tiktok": { "behold": "", "count": 4 },
+ "facebook": { "behold": "", "count": 3 }
+}

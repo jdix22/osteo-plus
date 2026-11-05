@@ -1,0 +1,94 @@
+{
+ "pages": [
+  {
+   "path": ""
+  },
+  {
+   "path": "about-us/"
+  },
+  {
+   "path": "services/"
+  },
+  {
+   "path": "osteopathy/"
+  },
+  {
+   "path": "physiotherapy/"
+  },
+  {
+   "path": "athletic-therapy/"
+  },
+  {
+   "path": "massage-therapy/"
+  },
+  {
+   "path": "therapeutic-sports-massage/"
+  },
+  {
+   "path": "fascial-stretch-therapy/"
+  },
+  {
+   "path": "tmj/"
+  },
+  {
+   "path": "acupuncture/"
+  },
+  {
+   "path": "cupping-therapy/"
+  },
+  {
+   "path": "naturopathy/"
+  },
+  {
+   "path": "lymphatic-drainage-massage/"
+  },
+  {
+   "path": "kinesiology-taping/"
+  },
+  {
+   "path": "team/justin-marco/"
+  },
+  {
+   "path": "team/anna-guimadeev/"
+  },
+  {
+   "path": "team/fanda-wong/"
+  },
+  {
+   "path": "team/erik-pasquino/"
+  },
+  {
+   "path": "team/dr-angelica-dimita/"
+  },
+  {
+   "path": "team/dr-flora/"
+  },
+  {
+   "path": "team/andrea-pellegrino/"
+  },
+  {
+   "path": "team/thalia/"
+  },
+  {
+   "path": "team/sammy/"
+  },
+  {
+   "path": "team/steve-shelmov/"
+  },
+  {
+   "path": "team/shirel-bronizer/"
+  },
+  {
+   "path": "pricing/"
+  },
+  {
+   "path": "faqs/"
+  },
+  {
+   "path": "contact-us/"
+  },
+  {
+   "path": "blog/"
+  }
+ ]
+}

@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Blog manager | OSTEO+</title>
+<link rel="icon" href="../assets/img/brand/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Urbanist:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css?v=20261105a">
+</head>
+<body>
+
+<!-- LOADING -->
+<section class="screen center" id="screen-loading">
+  <p class="muted">Opening the blog manager…</p>
+</section>
+
+<!-- ONE-TIME SETUP (only shown before a password exists) -->
+<section class="screen center" id="screen-setup" hidden>
+  <form class="card narrow" id="setup-form" autocomplete="off">
+    <img class="logo" src="../assets/img/brand/osteo-plus-logo-square.png" alt="OSTEO+" width="512" height="512">
+    <h1>Set up the blog manager</h1>
+    <p class="muted">One-time setup for whoever manages the website. You need a GitHub fine-grained access token for this site’s repository with <b>Contents: Read and write</b>. It’s encrypted with the password you choose here and never stored in plain text.</p>
+    <label class="field"><span>Repository</span><input name="repo" required placeholder="owner/repo"></label>
+    <label class="field"><span>Branch</span><input name="branch" required value="main"></label>
+    <label class="field"><span>GitHub access token</span><input name="token" type="password" required placeholder="github_pat_…"></label>
+    <label class="field"><span>Choose the clinic’s password</span><input name="pw" type="password" required minlength="10" autocomplete="new-password"></label>
+    <label class="field"><span>Repeat password</span><input name="pw2" type="password" required minlength="10" autocomplete="new-password"></label>
+    <p class="hint">At least 10 characters. A short phrase works well.</p>
+    <button class="btn btn-wide" type="submit">Encrypt and save</button>
+    <p class="status" role="status"></p>
+  </form>
+</section>
+
+<!-- LOGIN -->
+<section class="screen center" id="screen-login" hidden>
+  <form class="card narrow" id="login-form">
+    <img class="logo" src="../assets/img/brand/osteo-plus-logo-square.png" alt="OSTEO+" width="512" height="512">
+    <h1>Blog manager</h1>
+    <p class="muted">Sign in to write, edit or remove posts on the OSTEO+ website.</p>
+    <input type="text" name="username" value="osteo-plus" autocomplete="username" hidden>
+    <label class="field"><span>Password</span><input name="pw" type="password" required autocomplete="current-password" autofocus></label>
+    <button class="btn btn-wide" type="submit">Sign in</button>
+    <p class="status" role="status"></p>
+  </form>
+</section>
+
+<!-- DASHBOARD -->
+<section class="screen" id="screen-app" hidden>
+  <header class="topbar">
+    <div class="topbar-l"><img src="../assets/img/brand/mark-88.png" alt="" width="44" height="44"><strong>OSTEO<span>+</span> blog manager</strong></div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" class="is-on" data-tab="posts">Blog posts</button>
+      <button role="tab" data-tab="social">Social feeds</button>
+      <button role="tab" data-tab="settings">Settings</button>
+    </nav>
+    <div class="topbar-r">
+      <a href="../blog/" target="_blank" rel="noopener">View blog</a>
+      <button class="linkish" id="logout">Sign out</button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <section class="tab-panel" id="tab-posts">
+      <div class="panel-head">
+        <div>
+          <h2>Blog posts</h2>
+          <p class="muted" id="count-line"></p>
+        </div>
+        <button class="btn" id="add-post">Write a new post</button>
+      </div>
+      <p class="tip">Write or edit a post, then press <b>Publish to website</b> at the bottom. The post gets its own page, appears on the blog and the home page, and is added to the sitemap for Google, all in one step.</p>
+      <ul class="list" id="post-list"></ul>
+    </section>
+
+    <section class="tab-panel" id="tab-social" hidden>
+      <div class="panel-head"><div><h2>Social feeds</h2><p class="muted">The “OSTEO+ on social” section near the bottom of the home page.</p></div></div>
+      <form class="card" id="social-form">
+        <p class="muted">Until a feed is connected, the home page shows sample posts that link to the account. To show live posts, create a feed at <a href="https://behold.so" target="_blank" rel="noopener">behold.so</a>, copy its <b>Feed ID</b> (the code at the end of the feed address), and paste it below. You can also paste the full feed address.</p>
+        <div class="social-row">
+          <label class="field"><span>Instagram feed ID <small>@osteoplus_</small></span><input name="instagram" placeholder="e.g. NWiVcaJ9hRfC1Qx5Vyxl" autocomplete="off"></label>
+          <label class="field field-sm"><span>Posts shown</span><input name="instagram_count" type="number" min="4" max="12" step="4"></label>
+        </div>
+        <div class="social-row">
+          <label class="field"><span>TikTok feed ID <small>@osteoplus_</small></span><input name="tiktok" autocomplete="off"></label>
+          <label class="field field-sm"><span>Posts shown</span><input name="tiktok_count" type="number" min="2" max="8" step="2"></label>
+        </div>
+        <div class="social-row">
+          <label class="field"><span>Facebook feed ID <small>OSTEO+</small></span><input name="facebook" autocomplete="off"></label>
+          <label class="field field-sm"><span>Posts shown</span><input name="facebook_count" type="number" min="3" max="9" step="3"></label>
+        </div>
+        <button class="btn" type="submit">Save feeds</button>
+        <p class="status" role="status"></p>
+      </form>
+    </section>
+
+    <section class="tab-panel" id="tab-settings" hidden>
+      <div class="panel-head"><div><h2>Settings</h2></div></div>
+      <form class="card" id="pw-form" autocomplete="off">
+        <h3>Change password</h3>
+        <label class="field"><span>New password</span><input name="pw" type="password" minlength="10" required autocomplete="new-password"></label>
+        <label class="field"><span>Repeat new password</span><input name="pw2" type="password" minlength="10" required autocomplete="new-password"></label>
+        <button class="btn" type="submit">Change password</button>
+        <p class="status" role="status"></p>
+      </form>
+      <div class="card">
+        <h3>How publishing works</h3>
+        <p class="muted">Edits stay on this page until you press <b>Publish to website</b>. Publishing saves everything in one go, and the live site updates within a minute or two. Closing this page before publishing loses unpublished edits.</p>
+        <h3>Writing tips that help people find the post</h3>
+        <ul class="muted tips">
+          <li>Put the treatment and “Thornhill” in the title when it reads naturally, e.g. “Acupuncture for Migraines in Thornhill”.</li>
+          <li>Start with a one-sentence answer, then the detail. Use subheadings that are the questions patients ask.</li>
+          <li>Share what only your team knows: how you treat it, how many sessions it usually takes, what a visit is like.</li>
+          <li>Pick the practitioner who wrote or checked it, so readers can book with them.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <div class="publish-bar" id="publish-bar" hidden>
+    <p><b id="pending-count">0</b> unpublished change(s)</p>
+    <div>
+      <button class="btn btn-ghost" id="discard">Discard</button>
+      <button class="btn btn-gold" id="publish">Publish to website</button>
+    </div>
+  </div>
+</section>
+
+<!-- POST EDITOR -->
+<dialog class="editor" id="editor">
+  <form method="dialog" id="post-form">
+    <header class="editor-head">
+      <h2 id="editor-title">New post</h2>
+      <button class="x" value="cancel" formnovalidate aria-label="Close">×</button>
+    </header>
+    <div class="editor-body">
+      <div class="editor-main">
+        <label class="field"><span>Title</span><input name="title" required maxlength="120" placeholder="e.g. Acupuncture for Migraines in Thornhill"></label>
+        <p class="hint" id="slug-line"></p>
+        <div class="rte-wrap">
+          <div class="rte-bar" role="toolbar" aria-label="Formatting">
+            <button type="button" data-cmd="h2" title="Heading">Heading</button>
+            <button type="button" data-cmd="h3" title="Subheading">Subheading</button>
+            <button type="button" data-cmd="p" title="Normal text">Text</button>
+            <span class="sep"></span>
+            <button type="button" data-cmd="bold" title="Bold"><b>B</b></button>
+            <button type="button" data-cmd="italic" title="Italic"><i>I</i></button>
+            <button type="button" data-cmd="ul" title="Bulleted list">• List</button>
+            <button type="button" data-cmd="ol" title="Numbered list">1. List</button>
+            <button type="button" data-cmd="quote" title="Quote">“ Quote</button>
+            <span class="sep"></span>
+            <button type="button" data-cmd="link" title="Add link">Link</button>
+            <button type="button" data-cmd="unlink" title="Remove link">Unlink</button>
+            <button type="button" data-cmd="image" title="Insert photo">Photo</button>
+            <span class="sep"></span>
+            <button type="button" data-cmd="undo" title="Undo">↶</button>
+            <button type="button" data-cmd="redo" title="Redo">↷</button>
+          </div>
+          <div class="rte prose" id="rte" contenteditable="true" aria-label="Post text" data-placeholder="Start writing… Use Heading for each section, like “What to expect” or “How many sessions will I need?”"></div>
+        </div>
+        <input type="file" accept="image/*" id="inline-file" hidden>
+      </div>
+      <div class="editor-side">
+        <label class="drop" id="drop">
+          <input type="file" accept="image/*" id="cover-file">
+          <img id="cover-preview" alt="" hidden>
+          <span class="drop-msg" id="drop-msg"><b>Add a cover photo</b> or drag it here<br><small>Resized automatically. Landscape works best.</small></span>
+        </label>
+        <button type="button" class="linkish small" id="cover-remove" hidden>Remove cover photo</button>
+        <label class="field"><span>Describe the cover photo</span><input name="coverAlt" maxlength="140" placeholder="e.g. Acupuncture needles along a client’s upper back"></label>
+        <label class="field"><span>Summary <small id="desc-count"></small></span><textarea name="description" rows="3" maxlength="200" required placeholder="One or two sentences. Shows on the blog, in Google and when the post is shared."></textarea></label>
+        <div class="field-row">
+          <label class="field"><span>Date</span><input name="date" type="date" required></label>
+          <label class="field"><span>Status</span><select name="status"><option value="published">Published</option><option value="draft">Draft (hidden)</option></select></label>
+        </div>
+        <label class="field"><span>Written by</span><input name="author" list="team-names" required></label>
+        <datalist id="team-names"></datalist>
+        <label class="field"><span>Practitioner to book with</span><select name="expert"></select></label>
+        <label class="field"><span>Treatment</span><select name="service"></select></label>
+        <details class="more">
+          <summary>Google title (optional)</summary>
+          <label class="field"><span>Title shown in Google</span><input name="metaTitle" maxlength="70" placeholder="Leave blank to use the post title"></label>
+        </details>
+      </div>
+    </div>
+    <footer class="editor-foot">
+      <p class="status" id="editor-status" role="status"></p>
+      <button class="btn btn-ghost" type="button" id="preview-btn">Preview</button>
+      <button class="btn btn-ghost" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn" value="save">Save post</button>
+    </footer>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../assets/js/shared.js?v=20261105a"></script>
+<script src="admin.js?v=20261105a" defer></script>
+</body>
+</html>
