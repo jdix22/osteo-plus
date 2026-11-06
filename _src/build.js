@@ -47,7 +47,7 @@ const fromPrice = slug => { const p = priceFor(slug); return p ? Math.min(...p.r
 const CONSULTS = [
   { slug: 'osteopathy', label: 'Osteopathy', how: 'In person', disc: 1, tx: 1, who: 'justin-marco' },
   { slug: 'acupuncture', label: 'Acupuncture', how: 'In person', disc: 2, tx: 6, who: 'erik-pasquino' },
-  { slug: 'athletic-therapy', label: 'Athletic therapy', how: 'In person', disc: 3, tx: 16, who: 'shirel-bronizer' },
+  { slug: 'athletic-therapy', label: 'Athletic therapy', how: 'In person', disc: 3, tx: 16, who: 'shirel-bronizer', menu: false },
   { slug: 'naturopathy', label: 'Naturopathic medicine', how: 'By phone', disc: 8, tx: 28, who: 'dr-angelica-dimita' }
 ].map(c => ({ ...c, url: `${SITE.booking}#/discipline/${c.disc}/treatment/${c.tx}` }));
 const FREE_CONSULT = CONSULTS.filter(c => c.how === 'In person').map(c => c.slug);
@@ -242,7 +242,7 @@ function buildHome() {
         <p class="eyebrow">Free · 15 minutes · No obligation</p>
         <h2 id="consult-h">Book your free consult</h2>
         <p class="dlg-lede">Choose what you’d like to ask about. You’ll pick a time and fill in your details on our secure booking page.</p>
-        <ul class="consult-list">${CONSULTS.map(c => { const t = person(c.who); return `
+        <ul class="consult-list">${CONSULTS.filter(c => c.menu !== false).map(c => { const t = person(c.who); return `
           <li><a href="${c.url}" target="_blank" rel="noopener">
             <img src="${root}${t.photo}" alt="" width="720" height="900" loading="lazy" decoding="async">
             <span><b>${c.label}</b><small>${c.how} with ${esc(t.name)}</small></span>
