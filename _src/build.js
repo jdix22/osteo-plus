@@ -179,7 +179,7 @@ function buildHome() {
         <div class="match-cols">
           <div>
             <h3 class="match-h">Treatments that help</h3>
-            <ul class="match-svc">${c.services.map(service).map(s => `<li><a href="${s.path}"><span>${esc(s.name)}</span><small>${fromPrice(s.slug) ? 'From ' + money(fromPrice(s.slug)) : 'Part of treatment'}</small>${icon('arrow')}</a></li>`).join('')}</ul>
+            <ul class="match-svc">${c.services.map(service).map(s => `<li><a href="${s.path}"><span>${esc(c.labels?.[s.slug] || s.name)}</span><small>${fromPrice(s.slug) ? 'From ' + money(fromPrice(s.slug)) : 'Part of treatment'}</small>${icon('arrow')}</a></li>`).join('')}</ul>
           </div>
           <div>
             <h3 class="match-h">Who you’d see</h3>
