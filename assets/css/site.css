@@ -142,6 +142,47 @@ figure { margin: 0; }
 .hero-facts b { font: 400 2rem/1 var(--serif); color: var(--gold-hi); }
 .hero-facts span { font-size: .86rem; color: var(--muted-light); line-height: 1.35; }
 
+/* free consult: the third hero fact, as a button. The dial's gold quarter = 15 of 60 minutes. */
+.hero-facts .hf-stats { flex: none; padding-right: 24px; justify-content: center; gap: 10px; }
+.hf-stats p { display: flex; align-items: baseline; gap: 10px; margin: 0; }
+.hero-facts .hf-stats b { min-width: 1.4em; }
+.hero-facts .hf-consult { flex: 1; min-width: 0; padding-right: 0; justify-content: flex-start; }
+.cc-text .nw { white-space: nowrap; font: inherit; color: inherit; }
+.consult-cta { position: relative; display: flex; align-items: center; gap: 14px; padding: 12px 12px 12px 12px; border-radius: var(--r); text-decoration: none; color: var(--paper); background: linear-gradient(135deg, rgba(196, 163, 108, .22), rgba(196, 163, 108, .07) 60%); border: 1px solid rgba(220, 192, 141, .55); box-shadow: 0 0 0 0 rgba(196, 163, 108, .35); overflow: hidden; isolation: isolate; transition: transform .3s var(--ease), border-color .3s, box-shadow .3s, background .3s; animation: ccGlow 3.2s ease-in-out 1.2s 3; }
+.consult-cta::after { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(105deg, transparent 35%, rgba(255, 240, 210, .16) 50%, transparent 65%); transform: translateX(-100%); animation: ccShine 1.6s var(--ease) 1s 1 forwards; }
+.consult-cta:hover { transform: translateY(-2px); border-color: var(--gold-hi); background: linear-gradient(135deg, rgba(196, 163, 108, .32), rgba(196, 163, 108, .12) 60%); box-shadow: 0 16px 40px -18px rgba(196, 163, 108, .6); }
+.hero-facts .cc-dial { flex: none; width: 62px; height: 62px; border-radius: 50%; display: grid; place-content: center; text-align: center; background: radial-gradient(circle, var(--ink-2) 0 60%, transparent 61%), conic-gradient(var(--gold-hi) 0 25%, rgba(220, 192, 141, .2) 25% 100%); }
+.hero-facts .cc-dial b { font-size: 1.45rem; line-height: .9; color: var(--gold-hi); min-width: 0; }
+.hero-facts .cc-dial small { font: 600 .62rem/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted-light); margin-top: 2px; }
+.hero-facts .cc-text { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; color: inherit; font-size: inherit; }
+.cc-text small { font-size: .82rem; color: var(--gold-hi); font-weight: 600; letter-spacing: .01em; }
+.cc-text strong { font: 400 1.18rem/1.2 var(--serif); color: var(--paper); }
+.hero-facts .cc-go { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: var(--ink); transition: transform .3s var(--ease), background .3s; }
+.consult-cta:hover .cc-go { transform: translateX(3px); background: var(--gold-hi); }
+.cc-go .i { width: 18px; height: 18px; }
+@keyframes ccGlow { 50% { box-shadow: 0 0 0 7px rgba(196, 163, 108, 0); border-color: var(--gold-hi); } 0%, 100% { box-shadow: 0 0 0 0 rgba(196, 163, 108, .35); } }
+@keyframes ccShine { to { transform: translateX(100%); } }
+
+.consult-dlg { width: min(520px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); padding: clamp(24px, 4vw, 36px); border: 0; border-radius: 22px; background: var(--paper); color: var(--text); box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .6); }
+.consult-dlg[open] { animation: dlgIn .35s var(--ease); }
+.consult-dlg::backdrop { background: rgba(21, 18, 14, .62); backdrop-filter: blur(3px); }
+@keyframes dlgIn { from { opacity: 0; transform: translateY(14px) scale(.98); } }
+.consult-dlg h2 { font: 400 clamp(1.7rem, 4vw, 2.1rem)/1.1 var(--serif); color: var(--ink); margin: 6px 0 10px; }
+.dlg-lede { color: var(--muted); font-size: .98rem; margin-bottom: 18px; }
+.dlg-x { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--white); display: grid; place-items: center; cursor: pointer; }
+.dlg-x:hover { border-color: var(--ink); }
+.consult-list { list-style: none; display: grid; gap: 10px; }
+.consult-list a { display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: 14px; padding: 10px 16px 10px 10px; border: 1px solid var(--line); border-radius: 14px; background: var(--white); text-decoration: none; transition: border-color .25s, transform .25s var(--ease), box-shadow .25s; }
+.consult-list a:hover { border-color: var(--gold); transform: translateY(-1px); box-shadow: var(--shadow); }
+.consult-list img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: top; }
+.consult-list b { display: block; font: 400 1.2rem/1.2 var(--serif); color: var(--ink); }
+.consult-list small { display: block; margin-top: 2px; color: var(--muted); font-size: .88rem; line-height: 1.35; }
+.consult-list .i { color: var(--gold-deep); transition: transform .25s var(--ease); }
+.consult-list a:hover .i { transform: translateX(3px); }
+.dlg-foot { margin: 18px 0 0; font-size: .92rem; color: var(--muted); }
+.dlg-foot a { color: var(--gold-text); font-weight: 600; }
+.consult a { color: inherit; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+
 .hero-art { position: relative; aspect-ratio: 1 / 1.08; max-width: 560px; justify-self: end; width: 100%; }
 .rom { position: absolute; inset: -6% -6% auto; width: 112%; height: auto; overflow: visible; pointer-events: none; }
 .rom-track { fill: none; stroke: rgba(220, 192, 141, .16); stroke-width: 1.5; }
@@ -564,6 +605,11 @@ figure { margin: 0; }
   .hero-facts li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--line-dark); padding-top: 14px; }
   .hero-facts li { flex-direction: row; align-items: baseline; gap: 12px; padding-top: 14px; }
   .hero-facts b { font-size: 1.6rem; min-width: 92px; white-space: nowrap; }
+  .hero-facts .hf-stats { gap: 28px; justify-content: flex-start; }
+  .hero-facts .hf-stats b { min-width: 0; }
+  .hero-facts .hf-consult { padding-top: 16px; border-top: 0; }
+  .consult-cta { width: 100%; }
+  .cc-text strong { font-size: 1.1rem; }
   .hero-card { width: 62%; left: -4%; }
   .open-pill { right: -2%; top: auto; bottom: 30%; font-size: .78rem; padding: 8px 12px; }
   .brand-word { font-size: 1.3rem; }

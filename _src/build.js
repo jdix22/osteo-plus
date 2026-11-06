@@ -43,7 +43,15 @@ function pic(root, file, alt, { cls = '', lazy = true, sizes = '' } = {}) {
 const money = n => '$' + n;
 const priceFor = slug => C.PRICING.find(p => p.service === slug || p.also === slug);
 const fromPrice = slug => { const p = priceFor(slug); return p ? Math.min(...p.rows.map(r => r[1])) : null; };
-const FREE_CONSULT = ['osteopathy', 'acupuncture', 'athletic-therapy'];
+// Free 15-minute consults on Jane (discipline id / treatment id from the Jane booking page).
+const CONSULTS = [
+  { slug: 'osteopathy', label: 'Osteopathy', how: 'In person', disc: 1, tx: 1, who: 'justin-marco' },
+  { slug: 'acupuncture', label: 'Acupuncture', how: 'In person', disc: 2, tx: 6, who: 'erik-pasquino' },
+  { slug: 'athletic-therapy', label: 'Athletic therapy', how: 'In person', disc: 3, tx: 16, who: 'shirel-bronizer' },
+  { slug: 'naturopathy', label: 'Naturopathic medicine', how: 'By phone', disc: 8, tx: 28, who: 'dr-angelica-dimita' }
+].map(c => ({ ...c, url: `${SITE.booking}#/discipline/${c.disc}/treatment/${c.tx}` }));
+const FREE_CONSULT = CONSULTS.filter(c => c.how === 'In person').map(c => c.slug);
+const consultFor = slug => CONSULTS.find(c => c.slug === slug);
 const offering = slug => TEAM.filter(t => t.services.includes(slug));
 
 const bookBtn = (url, label, cls = 'btn btn-gold') => `<a class="${cls}" href="${url}" target="_blank" rel="noopener">${icon('calendar')}${label}</a>`;
@@ -220,10 +228,29 @@ function buildHome() {
         <a class="btn btn-line-light" href="#find">Find the right treatment ${icon('arrow')}</a>
       </div>
       <ul class="hero-facts">
-        <li><b>11</b><span>practitioners</span></li>
-        <li><b>12</b><span>treatments</span></li>
-        <li><b>15 min</b><span>free consult for osteopathy, acupuncture &amp; athletic therapy</span></li>
+        <li class="hf-stats"><p><b>${TEAM.length}</b><span>practitioners</span></p><p><b>${SERVICES.length}</b><span>treatments</span></p></li>
+        <li class="hf-consult">
+          <a class="consult-cta" href="${SITE.booking}" target="_blank" rel="noopener" data-consult aria-haspopup="dialog">
+            <span class="cc-dial" aria-hidden="true"><b>15</b><small>min</small></span>
+            <span class="cc-text"><small>Not sure where to start?</small><strong>Book a free <span class="nw">15-minute consult</span></strong></span>
+            <span class="cc-go" aria-hidden="true">${icon('arrow')}</span>
+          </a>
+        </li>
       </ul>
+      <dialog class="consult-dlg" data-consult-dlg aria-labelledby="consult-h">
+        <button class="dlg-x" type="button" data-close aria-label="Close">${icon('close')}</button>
+        <p class="eyebrow">Free · 15 minutes · No obligation</p>
+        <h2 id="consult-h">Book your free consult</h2>
+        <p class="dlg-lede">Choose what you’d like to ask about. You’ll pick a time and fill in your details on our secure booking page.</p>
+        <ul class="consult-list">${CONSULTS.map(c => { const t = person(c.who); return `
+          <li><a href="${c.url}" target="_blank" rel="noopener">
+            <img src="${root}${t.photo}" alt="" width="720" height="900" loading="lazy" decoding="async">
+            <span><b>${c.label}</b><small>${c.how} with ${esc(t.name)}</small></span>
+            ${icon('arrow')}
+          </a></li>`; }).join('')}
+        </ul>
+        <p class="dlg-foot">Still not sure? Call <a href="tel:${SITE.tel}">${SITE.phone}</a> and we’ll point you to the right practitioner.</p>
+      </dialog>
     </div>
     <div class="hero-art" aria-hidden="false">
       <svg class="rom" viewBox="0 0 400 400" aria-hidden="true" data-rom>
@@ -414,7 +441,7 @@ function buildService(s) {
   const consult = FREE_CONSULT.includes(s.slug);
   const aside = `<aside class="svc-aside">
       ${pr ? `<div class="aside-card">${priceCard(pr, { book: false }).replace('<h3 class="price-h">', '<h2 class="price-h">').replace(/<\/h3>/, '</h2>')}
-        ${consult ? `<p class="consult">${icon('check')}Free 15-minute initial consultation available</p>` : ''}
+        ${consult ? `<p class="consult">${icon('check')}<a href="${consultFor(s.slug).url}" target="_blank" rel="noopener">Book a free 15-minute initial consultation</a></p>` : ''}
         ${bookBtn(s.book, `Book ${s.short.toLowerCase()}`, 'btn btn-gold btn-wide')}
         <a class="small-link" href="${root}pricing/">All prices</a>
       </div>` : `<div class="aside-card"><h2 class="price-h">Included in treatment</h2><p class="muted">${s.slug === 'cupping-therapy' ? 'Cupping is added within osteopathy, massage, therapeutic sports massage or acupuncture sessions.' : 'Taping is applied during athletic therapy sessions.'}</p>

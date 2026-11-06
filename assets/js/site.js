@@ -107,6 +107,15 @@
   } else rom?.classList.add('is-on');
 
   /* ---------- blog filter ---------- */
+  // Free consult picker. Without <dialog> support the button just opens the booking page.
+  const consultDlg = $('[data-consult-dlg]');
+  if (consultDlg && consultDlg.showModal) {
+    $$('[data-consult]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); consultDlg.showModal(); }));
+    consultDlg.addEventListener('click', e => {
+      if (e.target === consultDlg || e.target.closest('[data-close], .consult-list a')) consultDlg.close();
+    });
+  }
+
   const filter = $('[data-post-filter]');
   if (filter) filter.addEventListener('click', e => {
     const b = e.target.closest('[data-tag]'); if (!b) return;

@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Urbanist:ital,wght@0,300..800;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=20261105a">
+<link rel="stylesheet" href="assets/css/site.css?v=20261105b">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["MedicalClinic","LocalBusiness"],"@id":"https://jdix22.github.io/osteo-plus/#clinic","name":"OSTEO+","alternateName":"Osteo Plus","slogan":"Unlock your body’s full potential","description":"OSTEO+ is an osteopathy clinic in Thornhill, Ontario specializing in chronic pain management and wellness, offering osteopathy, physiotherapy, athletic therapy, registered massage therapy, acupuncture, naturopathy and more.","url":"https://jdix22.github.io/osteo-plus/","logo":"https://jdix22.github.io/osteo-plus/assets/img/brand/osteo-plus-logo-square.png","image":"https://jdix22.github.io/osteo-plus/assets/img/clinic/osteo-plus-team-thornhill.webp","telephone":"+12895883124","email":"info@osteo-plus.ca","address":{"@type":"PostalAddress","streetAddress":"10 Disera Dr, Unit 200","addressLocality":"Thornhill","addressRegion":"ON","postalCode":"L4J 0A7","addressCountry":"CA"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"10:00","closes":"20:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Friday"],"opens":"10:00","closes":"14:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday"],"opens":"09:00","closes":"14:00"}],"medicalSpecialty":["Musculoskeletal","PhysicalTherapy"],"availableService":[{"@type":"MedicalTherapy","name":"Osteopathy","url":"https://jdix22.github.io/osteo-plus/osteopathy/"},{"@type":"MedicalTherapy","name":"Physiotherapy","url":"https://jdix22.github.io/osteo-plus/physiotherapy/"},{"@type":"MedicalTherapy","name":"Athletic Therapy","url":"https://jdix22.github.io/osteo-plus/athletic-therapy/"},{"@type":"MedicalTherapy","name":"Registered Massage Therapy","url":"https://jdix22.github.io/osteo-plus/massage-therapy/"},{"@type":"MedicalTherapy","name":"Therapeutic Sports Massage","url":"https://jdix22.github.io/osteo-plus/therapeutic-sports-massage/"},{"@type":"MedicalTherapy","name":"Fascial Stretch Therapy","url":"https://jdix22.github.io/osteo-plus/fascial-stretch-therapy/"},{"@type":"MedicalTherapy","name":"TMJ Treatment","url":"https://jdix22.github.io/osteo-plus/tmj/"},{"@type":"MedicalTherapy","name":"Acupuncture","url":"https://jdix22.github.io/osteo-plus/acupuncture/"},{"@type":"MedicalTherapy","name":"Cupping Therapy","url":"https://jdix22.github.io/osteo-plus/cupping-therapy/"},{"@type":"MedicalTherapy","name":"Naturopathy","url":"https://jdix22.github.io/osteo-plus/naturopathy/"},{"@type":"MedicalTherapy","name":"Brazilian Lymphatic Drainage","url":"https://jdix22.github.io/osteo-plus/lymphatic-drainage-massage/"},{"@type":"MedicalTherapy","name":"Kinesiology Taping","url":"https://jdix22.github.io/osteo-plus/kinesiology-taping/"}],"sameAs":["https://www.instagram.com/osteoplus_/","https://www.tiktok.com/@osteoplus_","https://www.facebook.com/profile.php?id=61550116336816"],"potentialAction":{"@type":"ReserveAction","target":"https://osteo-plus.janeapp.com/","name":"Book an appointment"}},{"@type":"WebSite","name":"OSTEO+","url":"https://jdix22.github.io/osteo-plus/"}]}</script>
 </head>
 <body>
@@ -108,10 +108,44 @@
         <a class="btn btn-line-light" href="#find">Find the right treatment <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.2 5.3 20 12l-6.8 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg></a>
       </div>
       <ul class="hero-facts">
-        <li><b>11</b><span>practitioners</span></li>
-        <li><b>12</b><span>treatments</span></li>
-        <li><b>15 min</b><span>free consult for osteopathy, acupuncture &amp; athletic therapy</span></li>
+        <li class="hf-stats"><p><b>11</b><span>practitioners</span></p><p><b>12</b><span>treatments</span></p></li>
+        <li class="hf-consult">
+          <a class="consult-cta" href="https://osteo-plus.janeapp.com/" target="_blank" rel="noopener" data-consult aria-haspopup="dialog">
+            <span class="cc-dial" aria-hidden="true"><b>15</b><small>min</small></span>
+            <span class="cc-text"><small>Not sure where to start?</small><strong>Book a free <span class="nw">15-minute consult</span></strong></span>
+            <span class="cc-go" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.2 5.3 20 12l-6.8 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg></span>
+          </a>
+        </li>
       </ul>
+      <dialog class="consult-dlg" data-consult-dlg aria-labelledby="consult-h">
+        <button class="dlg-x" type="button" data-close aria-label="Close"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6.4 5 5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6 10.6 12 5 6.4z"/></svg></button>
+        <p class="eyebrow">Free · 15 minutes · No obligation</p>
+        <h2 id="consult-h">Book your free consult</h2>
+        <p class="dlg-lede">Choose what you’d like to ask about. You’ll pick a time and fill in your details on our secure booking page.</p>
+        <ul class="consult-list">
+          <li><a href="https://osteo-plus.janeapp.com/#/discipline/1/treatment/1" target="_blank" rel="noopener">
+            <img src="assets/img/team/justin-marco.webp" alt="" width="720" height="900" loading="lazy" decoding="async">
+            <span><b>Osteopathy</b><small>In person with Justin Marco</small></span>
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.2 5.3 20 12l-6.8 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg>
+          </a></li>
+          <li><a href="https://osteo-plus.janeapp.com/#/discipline/2/treatment/6" target="_blank" rel="noopener">
+            <img src="assets/img/team/erik-pasquino.webp" alt="" width="720" height="900" loading="lazy" decoding="async">
+            <span><b>Acupuncture</b><small>In person with Erik Pasquino</small></span>
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.2 5.3 20 12l-6.8 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg>
+          </a></li>
+          <li><a href="https://osteo-plus.janeapp.com/#/discipline/3/treatment/16" target="_blank" rel="noopener">
+            <img src="assets/img/team/shirel-bronizer.webp" alt="" width="720" height="900" loading="lazy" decoding="async">
+            <span><b>Athletic therapy</b><small>In person with Shirel Bronizer</small></span>
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.2 5.3 20 12l-6.8 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg>
+          </a></li>
+          <li><a href="https://osteo-plus.janeapp.com/#/discipline/8/treatment/28" target="_blank" rel="noopener">
+            <img src="assets/img/team/dr-angelica-dimita.webp" alt="" width="720" height="900" loading="lazy" decoding="async">
+            <span><b>Naturopathic medicine</b><small>By phone with Dr. Angelica Dimita, ND</small></span>
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.2 5.3 20 12l-6.8 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg>
+          </a></li>
+        </ul>
+        <p class="dlg-foot">Still not sure? Call <a href="tel:+12895883124">(289) 588-3124</a> and we’ll point you to the right practitioner.</p>
+      </dialog>
     </div>
     <div class="hero-art" aria-hidden="false">
       <svg class="rom" viewBox="0 0 400 400" aria-hidden="true" data-rom>
@@ -890,7 +924,7 @@
   </div>
 </footer>
 <a class="m-book" href="https://osteo-plus.janeapp.com/" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 2h2v2h6V2h2v2h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3zm12 8H5v9h14zM5 8h14V6H5z"/></svg>Book appointment</a>
-<script src="assets/js/shared.js?v=20261105a"></script>
-<script src="assets/js/site.js?v=20261105a" defer></script>
+<script src="assets/js/shared.js?v=20261105b"></script>
+<script src="assets/js/site.js?v=20261105b" defer></script>
 </body>
 </html>
