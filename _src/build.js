@@ -53,7 +53,8 @@ const CONSULTS = [
 ].map(c => ({ ...c, url: `${SITE.booking}#/discipline/${c.disc}/treatment/${c.tx}` }));
 const FREE_CONSULT = CONSULTS.filter(c => c.how === 'In person').map(c => c.slug);
 const consultFor = slug => CONSULTS.find(c => c.slug === slug);
-const offering = slug => TEAM.filter(t => t.services.includes(slug));
+const taking = t => t.newPatients !== false;
+const offering = slug => TEAM.filter(t => t.services.includes(slug) && taking(t));
 
 const bookBtn = (url, label, cls = 'btn btn-gold') => `<a class="${cls}" href="${url}" target="_blank" rel="noopener">${icon('calendar')}${label}</a>`;
 const callBtn = (cls = 'btn btn-line') => `<a class="${cls}" href="tel:${SITE.tel}">${icon('phone')}${SITE.phone}</a>`;
@@ -183,7 +184,7 @@ function buildHome() {
           </div>
           <div>
             <h3 class="match-h">Who you’d see</h3>
-            <ul class="minis">${c.team.map(person).map(t => teamMini(root, t)).join('')}</ul>
+            <ul class="minis">${c.team.map(person).filter(taking).map(t => teamMini(root, t)).join('')}</ul>
           </div>
         </div>
       </div>`).join('');
@@ -581,6 +582,7 @@ function buildTeam(t) {
           ${callBtn()}
         </div>
         ${t.jane ? '' : `<p class="muted small">To book with ${esc(t.first)}, call the front desk or choose from the online booking page.</p>`}
+        ${taking(t) ? '' : `<p class="muted small">${esc(t.first)} is not taking new patients at this time. Existing patients can book online as usual.</p>`}
         <div class="prose">${b.bio.map(x => `<p>${esc(x)}</p>`).join('')}</div>
         <div class="bio-facts">
           <div><h2 class="h4">Training &amp; memberships</h2><ul class="ticks">${b.creds.map(c => `<li>${icon('check')}${esc(c)}</li>`).join('')}</ul></div>

@@ -43,9 +43,10 @@
   const JANE_DISC = id => (id ? `${SITE.booking}#/discipline/${id}` : SITE.booking);
 
   // Practitioners. `jane` is their id on the Jane booking page (null = not bookable online yet).
+  // `newPatients: false` keeps someone on the team page but out of every recommendation.
   const TEAM = [
     { slug: 'justin-marco', name: 'Justin Marco', first: 'Justin', role: 'Osteopath (DOMP) · CEO & Clinic Director', jane: 1, services: ['osteopathy', 'cupping-therapy'] },
-    { slug: 'anna-guimadeev', name: 'Anna Guimadeev', first: 'Anna', role: 'Osteopath (DOMP) & Registered Massage Therapist · Co-founder', jane: 2, services: ['osteopathy', 'massage-therapy', 'cupping-therapy'] },
+    { slug: 'anna-guimadeev', name: 'Anna Guimadeev', first: 'Anna', role: 'Osteopath (DOMP) & Registered Massage Therapist · Co-founder', jane: 2, newPatients: false, services: ['osteopathy', 'massage-therapy', 'cupping-therapy'] },
     { slug: 'fanda-wong', name: 'Fanda Wong', first: 'Fanda', role: 'Registered Acupuncturist & TCM Practitioner', jane: null, services: ['acupuncture', 'cupping-therapy'] },
     { slug: 'erik-pasquino', name: 'Erik Pasquino', first: 'Erik', role: 'Traditional Chinese Medicine Practitioner & Acupuncturist', jane: 4, services: ['acupuncture', 'cupping-therapy', 'tmj'] },
     { slug: 'dr-angelica-dimita', name: 'Dr. Angelica Dimita, ND', first: 'Dr. Angelica', role: 'Naturopathic Doctor', jane: 9, services: ['naturopathy'] },
@@ -104,7 +105,7 @@
   const icon = (name, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICON[name]}</svg>`;
 
   // Version stamp for CSS/JS links so browsers pick up changes (bump on every deploy).
-  const BUILD = '20261105d';
+  const BUILD = '20261105e';
 
   /* ---------- <head> ---------- */
   function head({ title, desc, path = '', root = '', image = 'assets/img/brand/og-osteo-plus.png', imageAlt, type = 'website', jsonld = [], noindex = SITE.noindex, extraHead = '' }) {
