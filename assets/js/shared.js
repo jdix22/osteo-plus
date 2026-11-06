@@ -49,11 +49,10 @@
     { slug: 'fanda-wong', name: 'Fanda Wong', first: 'Fanda', role: 'Registered Acupuncturist & TCM Practitioner', jane: null, services: ['acupuncture', 'cupping-therapy'] },
     { slug: 'erik-pasquino', name: 'Erik Pasquino', first: 'Erik', role: 'Traditional Chinese Medicine Practitioner & Acupuncturist', jane: 4, services: ['acupuncture', 'cupping-therapy', 'tmj'] },
     { slug: 'dr-angelica-dimita', name: 'Dr. Angelica Dimita, ND', first: 'Dr. Angelica', role: 'Naturopathic Doctor', jane: 9, services: ['naturopathy'] },
-    { slug: 'dr-flora', name: 'Dr. Flora, ND', first: 'Dr. Flora', role: 'Naturopathic Doctor', jane: null, services: ['naturopathy'] },
     { slug: 'andrea-pellegrino', name: 'Andrea Pellegrino, RMT', first: 'Andrea', role: 'Registered Massage Therapist · Lymphatic Drainage', jane: 14, services: ['lymphatic-drainage-massage', 'massage-therapy'] },
-    { slug: 'thalia', name: 'Thalia, RMT', first: 'Thalia', role: 'Registered Massage Therapist', jane: null, services: ['massage-therapy', 'lymphatic-drainage-massage', 'cupping-therapy'] },
     { slug: 'sammy', name: 'Sammy', first: 'Sammy', role: 'Massage Therapist · Fascial Stretch Therapist', jane: 12, services: ['fascial-stretch-therapy', 'therapeutic-sports-massage', 'tmj', 'massage-therapy'] },
     { slug: 'steve-shelmov', name: 'Steve Shelmov', first: 'Steve', role: 'Physiotherapist', jane: 15, services: ['physiotherapy'] },
+    { slug: 'marco-de-palma', name: 'Marco De Palma', first: 'Marco', role: 'Registered Physiotherapist', jane: 16, services: ['physiotherapy'] },
     { slug: 'shirel-bronizer', name: 'Shirel Bronizer', first: 'Shirel', role: 'Certified Athletic Therapist', jane: 3, services: ['athletic-therapy', 'fascial-stretch-therapy', 'kinesiology-taping'] }
   ].map(p => ({ ...p, photo: `assets/img/team/${p.slug}.webp`, book: JANE(p.jane), path: `team/${p.slug}/` }));
 
@@ -105,7 +104,7 @@
   const icon = (name, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICON[name]}</svg>`;
 
   // Version stamp for CSS/JS links so browsers pick up changes (bump on every deploy).
-  const BUILD = '20261105c';
+  const BUILD = '20261105d';
 
   /* ---------- <head> ---------- */
   function head({ title, desc, path = '', root = '', image = 'assets/img/brand/og-osteo-plus.png', imageAlt, type = 'website', jsonld = [], noindex = SITE.noindex, extraHead = '' }) {

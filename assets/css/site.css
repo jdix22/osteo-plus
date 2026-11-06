@@ -455,6 +455,8 @@ figure { margin: 0; }
 .price-table th, .price-table td { padding: 10px 0; border-bottom: 1px dashed var(--line); }
 .price-table th { text-align: left; font-weight: 500; }
 .price-table td { text-align: right; font: 400 1.3rem/1 var(--serif); color: var(--ink); }
+.price-note { font-size: .9rem; color: var(--text); margin: 12px 0 0; line-height: 1.45; }
+.price-note + .price-tax { margin-top: 6px; }
 .price-tax { font-size: .84rem; color: var(--muted); margin: 10px 0 14px; }
 .price-card .link-arrow { margin-top: auto; align-self: flex-start; }
 .notes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 36px 0 12px; }

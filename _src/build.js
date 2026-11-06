@@ -42,6 +42,7 @@ function pic(root, file, alt, { cls = '', lazy = true, sizes = '' } = {}) {
 
 const money = n => '$' + n;
 const priceFor = slug => C.PRICING.find(p => p.service === slug || p.also === slug);
+const lengths = pr => [...new Set(pr.rows.map(r => parseInt(r[0], 10)))].sort((x, y) => x - y).join(', ') + ' min';
 const fromPrice = slug => { const p = priceFor(slug); return p ? Math.min(...p.rows.map(r => r[1])) : null; };
 // Free 15-minute consults on Jane (discipline id / treatment id from the Jane booking page).
 const CONSULTS = [
@@ -99,11 +100,12 @@ const faqLd = items => ({ '@context': 'https://schema.org', '@type': 'FAQPage', 
 
 function priceCard(p, { book = true } = {}) {
   const s = service(p.service);
-  return `<div class="price-card" id="price-${p.service}">
+  return `<div class="price-card" id="price-${p.id || p.service}">
     <h3 class="price-h">${esc(p.name)}</h3>
     <table class="price-table"><caption class="sr">${esc(p.name)} prices</caption><tbody>
       ${p.rows.map(([len, amt]) => `<tr><th scope="row">${esc(len)}</th><td>${money(amt)}</td></tr>`).join('')}
     </tbody></table>
+    ${p.note ? `<p class="price-note">${esc(p.note)}</p>` : ''}
     <p class="price-tax">${esc(p.tax)}</p>
     ${book && s ? `<a class="link-arrow" href="${s.book}" target="_blank" rel="noopener">Book ${esc(s.short.toLowerCase())} ${icon('arrow')}</a>` : ''}
   </div>`;
@@ -192,7 +194,7 @@ function buildHome() {
     <div class="hero-copy">
       <p class="eyebrow eyebrow-light">${SITE.name} · ${SITE.city}, Ontario</p>
       <h1 class="hero-h1">An osteopathy clinic in Thornhill for chronic pain and <em>whole-body wellness.</em></h1>
-      <p class="hero-lede">Osteopaths, a physiotherapist, an athletic therapist, RMTs, acupuncturists and naturopathic doctors on one team, working together to help you unlock your body’s full potential.</p>
+      <p class="hero-lede">Osteopaths, physiotherapists, an athletic therapist, RMTs, acupuncturists and a naturopathic doctor on one team, working together to help you unlock your body’s full potential.</p>
       <div class="btn-row">
         ${bookBtn(SITE.booking, 'Book appointment')}
         <a class="btn btn-line-light" href="#find">Find the right treatment ${icon('arrow')}</a>
@@ -461,7 +463,7 @@ function buildServices() {
   const p = 'services/', root = rootFor(p);
   const rows = SERVICES.map(s => {
     const pr = priceFor(s.slug);
-    return `<tr><th scope="row"><a href="${root}${s.path}">${esc(s.name)}</a></th><td>${esc(s.blurb)}</td><td>${pr ? pr.rows.map(r => r[0]).join(', ') : 'Within other treatments'}</td><td>${pr ? 'From ' + money(fromPrice(s.slug)) : '—'}</td><td>${pr ? (pr.tax === C.NO_HST ? 'No HST' : 'HST may apply') : '—'}</td></tr>`;
+    return `<tr><th scope="row"><a href="${root}${s.path}">${esc(s.name)}</a></th><td>${esc(s.blurb)}</td><td>${pr ? lengths(pr) : 'Within other treatments'}</td><td>${pr ? 'From ' + money(fromPrice(s.slug)) : '—'}</td><td>${pr ? (pr.tax === C.NO_HST ? 'No HST' : 'HST may apply') : '—'}</td></tr>`;
   }).join('');
   const main = `
 <section class="page-hero">
@@ -554,7 +556,7 @@ function buildAbout() {
     root, current: 'about', main,
     meta: {
       title: 'About Us & Our Team | OSTEO+ Osteopathy Clinic Thornhill',
-      desc: 'Meet the OSTEO+ team in Thornhill: osteopaths, a physiotherapist, an athletic therapist, RMTs, acupuncturists and naturopathic doctors. Book with any of them online.',
+      desc: 'Meet the OSTEO+ team in Thornhill: osteopaths, physiotherapists, an athletic therapist, RMTs, acupuncturists and a naturopathic doctor. Book with any of them online.',
       path: p, jsonld: [businessLd(), crumbsLd([['Home', ''], ['About us', p]])]
     }
   }));
@@ -622,7 +624,7 @@ function buildPricing() {
     ${crumbs(root, [['Home', ''], ['Pricing', p]])}
     <p class="eyebrow">Pricing</p>
     <h1 class="h1">Treatment prices at OSTEO+</h1>
-    <p class="lede">Sessions start at $80 for 30 minutes of acupuncture or fascial stretch therapy. Osteopathy is $100–$155, massage therapy $90–$170, and physiotherapy $100–$150. Acupuncture, naturopathy and physiotherapy have no HST; HST applies to other services based on the service.</p>
+    <p class="lede">Sessions start at $80 for 30 minutes of acupuncture or fascial stretch therapy. Osteopathy is $100–$155, massage therapy $90–$175, and physiotherapy $100–$150. Prices match our online booking page. Acupuncture, naturopathy and physiotherapy have no HST; HST applies to other services based on the service.</p>
   </div>
 </section>
 <section class="section">
@@ -771,7 +773,9 @@ const moved = {
   'soft-tissue-therapy': 'massage-therapy/', 'recovery-therapy': 'fascial-stretch-therapy/', brazilianlymphaticdrainagemassage: 'lymphatic-drainage-massage/',
   'copy-of-fascial-stretch-therapy': 'naturopathy/', 'copy-of-fascial-stretch-therapy-1': 'physiotherapy/', 'copy-of-naturopathy': 'tmj/', 'copy-of-tmj': 'therapeutic-sports-massage/'
 };
-Object.entries(C.BIOS).forEach(([slug, b]) => (moved[b.old] = `team/${slug}/`));
+Object.entries(C.BIOS).forEach(([slug, b]) => b.old && (moved[b.old] = `team/${slug}/`));
+// Practitioners no longer with the clinic: their old addresses go to the team page.
+['flora', 'thalia', 'team/dr-flora', 'team/thalia'].forEach(from => (moved[from] = 'about-us/'));
 Object.entries(moved).forEach(([from, to]) => redirect(from, to));
 
 // Pages listed in the sitemap (blog posts are added from data/posts.json by shared.sitemap).

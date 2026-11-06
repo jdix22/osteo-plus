@@ -6,16 +6,20 @@ const HST = 'HST applicable based on service';
 const NO_HST = 'No HST';
 
 // Prices exactly as published on osteo-plus.ca/pricing.
+// Prices from the clinic's Jane booking page (osteo-plus.janeapp.com), 5 Nov 2026. Free 15-minute consults are listed separately.
 const PRICING = [
-  { service: 'osteopathy', name: 'Osteopathy', rows: [['30 min', 100], ['45 min', 125], ['60 min', 155]], tax: HST },
-  { service: 'athletic-therapy', name: 'Athletic Therapy', rows: [['30 min', 90], ['45 min', 110], ['60 min', 140]], tax: HST },
-  { service: 'massage-therapy', name: 'Massage Therapy', rows: [['30 min', 90], ['45 min', 110], ['60 min', 130], ['90 min', 170]], tax: HST },
-  { service: 'therapeutic-sports-massage', also: 'tmj', name: 'Therapeutic Sports Massage / TMJ', rows: [['45 min', 110], ['60 min', 130], ['75 min', 160]], tax: HST },
-  { service: 'acupuncture', name: 'Acupuncture', rows: [['30 min', 80], ['45 min', 100], ['60 min', 120]], tax: NO_HST },
-  { service: 'lymphatic-drainage-massage', name: 'Brazilian Lymphatic Drainage', rows: [['60 min facial', 165], ['60 min', 175], ['90 min', 240]], tax: HST },
-  { service: 'naturopathy', name: 'Naturopathy', rows: [['30 min', 120], ['45 min', 150], ['75 min', 220]], tax: NO_HST },
-  { service: 'fascial-stretch-therapy', name: 'Fascial Stretch Therapy', rows: [['30 min', 80], ['60 min', 120], ['90 min', 160]], tax: HST },
-  { service: 'physiotherapy', name: 'Physiotherapy', rows: [['30 min follow-up', 100], ['60 min initial assessment', 150]], tax: NO_HST }
+  { service: 'osteopathy', name: 'Osteopathy', rows: [['30 min', 100], ['45 min', 125], ['60 min', 155]], note: 'New-patient initial assessment: 60 min, $155.', tax: HST },
+  { service: 'physiotherapy', name: 'Physiotherapy', rows: [['60 min initial assessment', 150], ['30 min follow-up', 100], ['45 min follow-up', 125]], note: 'Teens: same rates for the initial assessment and 30 min follow-up.', tax: NO_HST },
+  { service: 'athletic-therapy', name: 'Athletic Therapy', rows: [['30 min', 90], ['45 min', 110], ['60 min', 140]], note: 'New-patient initial assessment: 60 min, $140.', tax: HST },
+  { service: 'massage-therapy', name: 'Massage Therapy', rows: [['30 min', 90], ['45 min', 110], ['60 min', 130], ['90 min', 170]], note: 'Same rates for relaxation and soft tissue therapy. Kids/teen massage: 30 min $90, 45 min $110.', tax: HST },
+  { service: 'massage-therapy', id: 'prenatal-massage', name: 'Pre/Post-Natal Massage', rows: [['60 min', 135], ['90 min', 175]], tax: HST },
+  { service: 'massage-therapy', id: 'tri', name: 'Therapeutic Rehab Integration (TRI)', rows: [['30 min', 95], ['45 min', 115], ['60 min', 135]], tax: HST },
+  { service: 'therapeutic-sports-massage', name: 'Therapeutic Sports Massage', rows: [['30 min', 90], ['45 min', 110], ['60 min', 130]], note: 'Kids/teen sessions: 30 min $90, 45 min $110.', tax: HST },
+  { service: 'tmj', name: 'TMJ/TMD Treatment', rows: [['45 min initial assessment', 110], ['30 min treatment', 90]], tax: HST },
+  { service: 'acupuncture', name: 'Acupuncture', rows: [['30 min', 80], ['45 min', 100], ['60 min', 120]], note: 'New-patient initial assessment: 60 min, $120.', tax: NO_HST },
+  { service: 'lymphatic-drainage-massage', name: 'Brazilian Lymphatic Drainage', rows: [['60 min buccal sculpting', 165], ['60 min', 175], ['90 min full body', 240], ['120 min lymphatic + buccal', 325]], tax: HST },
+  { service: 'naturopathy', name: 'Naturopathy', rows: [['75 min adult initial consult', 220], ['60 min child/teen initial (0–17)', 200], ['30 min follow-up', 120], ['45 min follow-up', 150]], note: 'In person or virtual.', tax: NO_HST },
+  { service: 'fascial-stretch-therapy', name: 'Fascial Stretch Therapy', rows: [['30 min upper or lower body', 80], ['45 min full body', 100], ['60 min full body', 120], ['75 min full body', 140]], tax: HST }
 ];
 
 const PREP_COMMON = {
@@ -59,7 +63,7 @@ const SERVICE_PAGES = {
   physiotherapy: {
     title: 'Physiotherapy in Thornhill',
     metaTitle: 'Physiotherapy in Thornhill | OSTEO+',
-    desc: 'Physiotherapy at OSTEO+ Thornhill for injuries, post-surgical recovery, chronic pain and sports injuries. Initial assessment $150, follow-ups $100. Book online.',
+    desc: 'Physiotherapy at OSTEO+ Thornhill for injuries, post-surgical recovery, chronic pain and sports injuries. Initial assessment $150, follow-ups from $100. Book online.',
     q: 'What is physiotherapy?',
     what: [
       'Physiotherapy is a hands-on, evidence-based treatment approach focused on restoring movement, reducing pain and improving overall function. It addresses injuries, post-surgical recovery, chronic pain, sports-related conditions and movement problems.',
@@ -136,7 +140,7 @@ const SERVICE_PAGES = {
   'therapeutic-sports-massage': {
     title: 'Therapeutic Sports Massage in Thornhill',
     metaTitle: 'Therapeutic Sports Massage in Thornhill | OSTEO+',
-    desc: 'Therapeutic sports massage at OSTEO+ Thornhill: deep tissue, myofascial release, trigger point, cupping and IASTM for tight, sore muscles. From $110. Book online.',
+    desc: 'Therapeutic sports massage at OSTEO+ Thornhill: deep tissue, myofascial release, trigger point, cupping and IASTM for tight, sore muscles. From $90. Book online.',
     q: 'What is therapeutic sports massage?',
     what: [
       'Therapeutic sports massage uses deep pressure and specific techniques to address muscle and joint issues. Although it is often associated with athletes, it is very effective for anyone with muscle tension, stress or discomfort from everyday activities.',
@@ -158,7 +162,7 @@ const SERVICE_PAGES = {
   'fascial-stretch-therapy': {
     title: 'Fascial Stretch Therapy (FST) in Thornhill',
     metaTitle: 'Fascial Stretch Therapy (FST) in Thornhill | OSTEO+',
-    desc: 'Fascial Stretch Therapy at OSTEO+ Thornhill: assisted stretching that targets the fascia to improve flexibility, posture and pain. 30–90 min from $80. Book online.',
+    desc: 'Fascial Stretch Therapy at OSTEO+ Thornhill: assisted stretching that targets the fascia to improve flexibility, posture and pain. 30–75 min from $80. Book online.',
     q: 'What is Fascial Stretch Therapy (FST)?',
     what: [
       'Fascial Stretch Therapy (FST) is a type of manual therapy designed to improve flexibility, reduce pain and enhance physical function by targeting the fascia, the connective tissue that surrounds and supports muscles, bones and joints throughout the body. It uses gentle assisted stretching and is suitable for anyone.'
@@ -179,7 +183,7 @@ const SERVICE_PAGES = {
   tmj: {
     title: 'TMJ Treatment in Thornhill',
     metaTitle: 'TMJ & Jaw Pain Treatment in Thornhill | OSTEO+',
-    desc: 'TMJ treatment at OSTEO+ Thornhill for jaw pain, clicking, locking and headaches, using massage therapy and acupuncture. Sessions from $110. Book online.',
+    desc: 'TMJ treatment at OSTEO+ Thornhill for jaw pain, clicking, locking and headaches, using massage therapy and acupuncture. Sessions from $90. Book online.',
     q: 'What is TMJ dysfunction?',
     what: [
       'Temporomandibular joint (TMJ) dysfunction is a condition affecting the jaw joint and the muscles around it. It can cause pain, discomfort and difficulty moving the jaw, which affects everyday things like chewing and speaking.',
@@ -238,7 +242,7 @@ const SERVICE_PAGES = {
   naturopathy: {
     title: 'Naturopathy in Thornhill',
     metaTitle: 'Naturopathic Doctor in Thornhill | Naturopathy | OSTEO+',
-    desc: 'Naturopathic Doctors at OSTEO+ Thornhill for stress, sleep, chronic pain, hormones, digestion, fertility and paediatrics. In person or virtual. Book online.',
+    desc: 'A Naturopathic Doctor at OSTEO+ Thornhill for stress, sleep, chronic pain, hormones, digestion, fertility and paediatrics. In person or virtual. Book online.',
     q: 'What is naturopathy?',
     what: [
       'Naturopathic medicine is a holistic approach to healthcare that emphasizes the body’s inherent ability to heal itself. Naturopathic Doctors are trained as primary care providers, diagnosing and treating patients with a blend of evidence-based medicine and traditional natural therapies.',
@@ -257,7 +261,7 @@ const SERVICE_PAGES = {
       'People seek it out for reduced swelling, a smoother look to cellulite, digestion support and overall detox, and for a smoother, firmer skin texture, all while accentuating the body’s natural curves.'
     ],
     helps: ['Swelling and fluid retention', 'Bloating and digestion', 'Post-surgical recovery', 'Facial puffiness (buccal facial massage)', 'Relaxation'],
-    note: 'Our lymphatic therapists also offer buccal (intraoral) facial massage, and Thalia offers a Thermotherapy Lymphatic Drainage Detox Massage using a sauna blanket. Read more in our blog post on lymphatic drainage and buccal facial massage.'
+    note: 'Our lymphatic therapists also offer buccal (intraoral) facial massage. Read more in our blog post on lymphatic drainage and buccal facial massage.'
   },
   'kinesiology-taping': {
     title: 'Kinesiology Taping in Thornhill',
@@ -276,16 +280,16 @@ const SERVICE_PAGES = {
    using only what their own bios and the clinic's pages say they treat. */
 const CONCERNS = [
   { id: 'back-neck', label: 'Back or neck pain', services: ['osteopathy', 'physiotherapy', 'massage-therapy'], team: ['justin-marco', 'anna-guimadeev', 'steve-shelmov'], why: 'Osteopathy and physiotherapy both treat back and neck pain hands-on; massage eases the muscle tension around it.' },
-  { id: 'sports', label: 'Sports injury', services: ['athletic-therapy', 'physiotherapy', 'therapeutic-sports-massage', 'kinesiology-taping'], team: ['shirel-bronizer', 'steve-shelmov', 'sammy'], why: 'Assessment, rehab and taping to get you back to your sport, plus deep work on tight muscles.' },
-  { id: 'chronic', label: 'Chronic pain', services: ['osteopathy', 'acupuncture', 'naturopathy'], team: ['justin-marco', 'anna-guimadeev', 'dr-flora'], why: 'Chronic pain is what OSTEO+ specializes in, with whole-body osteopathy at the centre.' },
+  { id: 'sports', label: 'Sports injury', services: ['athletic-therapy', 'physiotherapy', 'therapeutic-sports-massage', 'kinesiology-taping'], team: ['shirel-bronizer', 'steve-shelmov', 'marco-de-palma', 'sammy'], why: 'Assessment, rehab and taping to get you back to your sport, plus deep work on tight muscles.' },
+  { id: 'chronic', label: 'Chronic pain', services: ['osteopathy', 'acupuncture', 'naturopathy'], team: ['justin-marco', 'anna-guimadeev', 'dr-angelica-dimita'], why: 'Chronic pain is what OSTEO+ specializes in, with whole-body osteopathy at the centre.' },
   { id: 'jaw', label: 'Jaw pain or clenching (TMJ)', services: ['tmj', 'acupuncture', 'massage-therapy'], team: ['sammy', 'erik-pasquino'], why: 'Massage techniques and acupuncture aimed at the jaw muscles and the root cause of the tension.' },
   { id: 'headaches', label: 'Headaches & migraines', services: ['osteopathy', 'acupuncture', 'tmj'], team: ['justin-marco', 'erik-pasquino'], why: 'Osteopathy is used for headaches and migraines, and acupuncture is commonly used for migraines.' },
   { id: 'stiff', label: 'Stiffness & flexibility', services: ['fascial-stretch-therapy', 'therapeutic-sports-massage'], team: ['sammy', 'shirel-bronizer'], why: 'Assisted stretching that targets the fascia, and deep work on tight muscle groups.' },
   { id: 'stress', label: 'Stress, anxiety & sleep', services: ['acupuncture', 'naturopathy', 'massage-therapy'], team: ['erik-pasquino', 'dr-angelica-dimita', 'andrea-pellegrino'], why: 'Calming treatments and a natural, whole-person plan for stress, mood and sleep.' },
-  { id: 'pregnancy', label: 'Pregnancy & postpartum', services: ['acupuncture', 'massage-therapy'], team: ['fanda-wong', 'andrea-pellegrino', 'thalia'], why: 'Perinatal acupuncture and pre/post-natal massage for comfort before, during and after pregnancy.' },
-  { id: 'fertility', label: 'Fertility & hormones', services: ['acupuncture', 'naturopathy'], team: ['fanda-wong', 'dr-flora', 'dr-angelica-dimita'], why: 'Women’s health and fertility acupuncture, and naturopathic care for hormonal concerns.' },
-  { id: 'swelling', label: 'Swelling, bloating & post-surgery', services: ['lymphatic-drainage-massage'], team: ['andrea-pellegrino', 'thalia'], why: 'Gentle lymphatic drainage to move excess fluid and support recovery after procedures.' },
-  { id: 'digestion', label: 'Digestion', services: ['naturopathy', 'acupuncture', 'lymphatic-drainage-massage'], team: ['dr-flora', 'erik-pasquino', 'andrea-pellegrino'], why: 'Naturopathic care, digestive acupuncture and lymphatic massage all support digestion.' }
+  { id: 'pregnancy', label: 'Pregnancy & postpartum', services: ['acupuncture', 'massage-therapy'], team: ['fanda-wong', 'andrea-pellegrino', 'anna-guimadeev'], why: 'Perinatal acupuncture and pre/post-natal massage for comfort before, during and after pregnancy.' },
+  { id: 'fertility', label: 'Fertility & hormones', services: ['acupuncture', 'naturopathy'], team: ['fanda-wong', 'dr-angelica-dimita'], why: 'Women’s health and fertility acupuncture, and naturopathic care for hormonal concerns.' },
+  { id: 'swelling', label: 'Swelling, bloating & post-surgery', services: ['lymphatic-drainage-massage'], team: ['andrea-pellegrino'], why: 'Gentle lymphatic drainage to move excess fluid and support recovery after procedures.' },
+  { id: 'digestion', label: 'Digestion', services: ['naturopathy', 'acupuncture', 'lymphatic-drainage-massage'], team: ['dr-angelica-dimita', 'erik-pasquino', 'andrea-pellegrino'], why: 'Naturopathic care, digestive acupuncture and lymphatic massage all support digestion.' }
 ];
 
 /* Team bios (from each practitioner's page on osteo-plus.ca). */
@@ -342,18 +346,7 @@ const BIOS = {
       'Dr. Angelica is an active member of the Canadian Association of Naturopathic Doctors (CAND), the Ontario Association of Naturopathic Doctors (OAND) and the College of Naturopaths of Ontario (CONO).'
     ]
   },
-  'dr-flora': {
-    short: 'Naturopathic Doctor',
-    old: 'flora',
-    creds: ['Doctor of Naturopathy, Canadian College of Naturopathic Medicine (CCNM)', 'BSc, Biomedical Sciences, Biology and Psychology, University of Waterloo', 'Licensed by the College of Naturopaths of Ontario (CONO)', 'Member, CAND and OAND'],
-    focus: ['Fertility', 'Pain management', 'Anxiety', 'Digestive health', 'Adrenal fatigue', 'Stress & weight management', 'High blood pressure, diabetes & cholesterol'],
-    bio: [
-      'Flora is a Naturopathic Doctor based in Toronto, licensed by the College of Naturopaths of Ontario (CONO), and a proud member of the Canadian Association of Naturopathic Doctors (CAND) and the Ontario Association of Naturopathic Doctors (OAND).',
-      'Growing up in a traditional Chinese family, Flora was often treated with Chinese medicine and acupuncture, which sparked her interest in natural healing. After moving from Hong Kong to Toronto she discovered Western herbal medicine and nutritional supplements, which inspired her career in naturopathic medicine.',
-      'She earned her Doctor of Naturopathy from the Canadian College of Naturopathic Medicine (CCNM), a rigorous four-year program, with clinical training at the Robert Schad Naturopathic Clinic and Brampton Civic Hospital. She also holds a BSc in Biomedical Sciences, Biology and Psychology from the University of Waterloo.',
-      'Flora believes strongly in preventative medicine, education, active listening and treating root causes rather than only managing symptoms. Her focus areas include fertility, pain management, anxiety, digestive health, adrenal fatigue, stress and weight management, and chronic conditions such as high blood pressure, diabetes and high cholesterol. Outside practice she enjoys nature trails, photography and time outdoors with her two little dogs.'
-    ]
-  },
+
   'andrea-pellegrino': {
     short: 'Registered Massage Therapist',
     old: 'andrea',
@@ -364,17 +357,7 @@ const BIOS = {
       'As the clinic’s relaxation massage specialist, Andrea is the person to see when you need to unwind. She is also trained in Buccal (intraoral) facial massage, a sculpting, rejuvenating complement to her lymphatic work.'
     ]
   },
-  thalia: {
-    short: 'Registered Massage Therapist',
-    old: 'thalia',
-    creds: ['Registered Massage Therapist with the CMTO since 2020', 'Advanced Diploma in Massage Therapy, Humber College', 'Certified in cupping and IASTT'],
-    languages: 'Spanish and English',
-    bio: [
-      'Thalia became a Registered Massage Therapist with the CMTO in 2020 after earning an advanced diploma in massage therapy from Humber College. She is bilingual in Spanish and English and holds additional certifications in cupping and IASTT.',
-      'She offers pre/post-natal, relaxation, therapeutic and deep tissue massage, and treats each person around their own goals, whether that is reducing musculoskeletal pain or swelling or improving overall physical and mental well-being.',
-      'Thalia also provides Brazilian Lymphatic Drainage Massage, Buccal Facial Massage, and Thermotherapy Lymphatic Drainage Detox Massage using a Higher Dose sauna blanket. These treatments stimulate the lymphatic system, reduce bloating, contour the body and promote deep detox. All of these services are covered under RMT insurance receipts.'
-    ]
-  },
+
   sammy: {
     short: 'Massage & Fascial Stretch Therapist',
     old: 'sammy',
@@ -393,7 +376,18 @@ const BIOS = {
       'Steve earned his Master of Science in Physical Therapy from Queen’s University and holds a Bachelor of Kinesiology & Health Science from York University.',
       'He has extensive experience with athletes of all ages and backgrounds, keeps up with current research, and takes an evidence-based approach. His treatment combines functional movement patterns, manual therapy and individualized exercise programs to help patients return to activity, reduce pain and reach their health and fitness goals.'
     ]
+  },  'marco-de-palma': {
+    short: 'Physiotherapist',
+    creds: ['Registered Physiotherapist, College of Physiotherapists of Ontario', 'Master’s in Physical Therapy, Queen’s University (2018)', 'Kinesiology (major) and Biology (minor), York University (2014)'],
+    focus: ['Post-surgical rehab', 'Sports injuries', 'Dizziness & balance (vestibular)'],
+    bio: [
+      'Marco is a registered physiotherapist in Ontario, licensed by the College of Physiotherapists of Ontario. His path into the profession started on the other side of the treatment table: he injured both knees and needed ACL reconstruction surgeries. The physiotherapy that got him back on his feet shaped his career.',
+      'That experience is why Marco puts the relationship first. Rehab is as much mental as physical, and confidence and trust in your body come back alongside strength. He takes time to listen to each patient, understand what matters to them, and build the plan together, because the plan that works is the one you’ll follow.',
+      'He most enjoys treating post-surgical patients, sports injuries, and vestibular conditions such as dizziness and balance problems. His treatment pairs hands-on soft tissue work and joint mobilizations with exercise programs built around how each patient moves.',
+      'Marco graduated from York University in 2014 with a major in Kinesiology and a minor in Biology, then completed his Master’s in Physical Therapy at Queen’s University in 2018. Outside the clinic he stays as active as possible, tests new recipes, and above all makes pizza in his outdoor oven.'
+    ]
   },
+
   'shirel-bronizer': {
     short: 'Athletic Therapist',
     old: 'shirelbronizer',
