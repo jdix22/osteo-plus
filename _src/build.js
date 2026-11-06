@@ -130,7 +130,7 @@ function visitBlock(root, { map = true, h = 'h2' } = {}) {
   </div>`;
 }
 
-/* ---------- social feed (placeholders until Behold feed IDs are added in data/social.json) ---------- */
+/* ---------- Instagram feed (clinic photos until the live Behold feed in data/social.json loads) ---------- */
 const PH = {
   instagram: [
     ['clinic/osteo-plus-team-thornhill', 'Meet the OSTEO+ team. Osteopathy, physio, athletic therapy, RMTs, acupuncture and naturopathy under one roof.'],
@@ -141,56 +141,26 @@ const PH = {
     ['services/athletic-therapy-session', 'Athletic therapy: assessment, rehab and taping to get you back to 100%.'],
     ['clinic/osteopath-definition-wall', 'Os·te·o·path: someone who treats the whole you.'],
     ['clinic/waiting-area', 'A calm space to land before your treatment.']
-  ],
-  tiktok: [
-    ['services/cupping-cups', 'Cupping, explained in 30 seconds'],
-    ['services/lymphatic-drainage-massage', 'What buccal facial massage actually does'],
-    ['services/fascial-stretch-therapy', 'Assisted stretching for tight hips'],
-    ['services/acupuncture-needles', 'Does acupuncture hurt? Watch this.']
-  ],
-  facebook: [
-    ['clinic/treatment-room', 'We’re on the second floor at 10 Disera Dr in Thornhill. Book online any time, or call (289) 588-3124.'],
-    ['services/lymphatic-drainage-massage', 'New on the blog: the natural Botox alternative. Lymphatic drainage and buccal facial massage with Andrea Pellegrino, RMT.'],
-    ['services/consultation', 'Free 15-minute consultations are available for osteopathy, acupuncture and athletic therapy. Choose “Initial Consultation” when you book.']
   ]
 };
 
 function socialSection(root) {
   const s = SITE.social;
   const ig = PH.instagram.map(([im, cap]) => `<li><a class="ig-tile" href="${s.instagram.url}" target="_blank" rel="noopener">${pic(root, im, cap)}<span class="ig-cap">${esc(cap)}</span></a></li>`).join('');
-  const tt = PH.tiktok.map(([im, cap]) => `<li><a class="tt-tile" href="${s.tiktok.url}" target="_blank" rel="noopener">${pic(root, im, '')}<span class="tt-play">${icon('play')}</span><span class="tt-cap">${esc(cap)}</span></a></li>`).join('');
-  const fb = PH.facebook.map(([im, cap]) => `<li><article class="fb-post">
-      <header><img src="${root}assets/img/brand/osteo-plus-avatar.png" alt="" width="80" height="80"><span><b>${SITE.name}</b><small>Facebook</small></span></header>
-      <p>${esc(cap)}</p>
-      <a href="${s.facebook.url}" target="_blank" rel="noopener" class="fb-img">${pic(root, im, '')}</a>
-    </article></li>`).join('');
   return `<section class="section social-sec" id="social" aria-labelledby="social-h">
   <div class="wrap">
     <div class="sec-head">
       <div>
         <p class="eyebrow">Follow along</p>
-        <h2 class="h2" id="social-h">OSTEO+ on social</h2>
-        <p class="sec-sub">Tips, team news and behind-the-scenes from the clinic. <span class="feed-note" data-feed-note>Live posts appear here once the feeds are connected.</span></p>
+        <h2 class="h2" id="social-h">OSTEO+ on Instagram</h2>
+        <p class="sec-sub">Tips, team news and behind-the-scenes from the clinic.</p>
       </div>
       ${OP.socialLinks('social social-big')}
     </div>
-    <div class="feed-tabs" role="tablist" aria-label="Social networks">
-      <button role="tab" id="tab-ig" aria-controls="feed-instagram" aria-selected="true" data-feed-tab="instagram">${icon('instagram')}Instagram</button>
-      <button role="tab" id="tab-tt" aria-controls="feed-tiktok" aria-selected="false" tabindex="-1" data-feed-tab="tiktok">${icon('tiktok')}TikTok</button>
-      <button role="tab" id="tab-fb" aria-controls="feed-facebook" aria-selected="false" tabindex="-1" data-feed-tab="facebook">${icon('facebook')}Facebook</button>
-    </div>
     <div class="feeds" data-root="${root}">
-      <div class="feed" id="feed-instagram" role="tabpanel" aria-labelledby="tab-ig" data-feed="instagram">
+      <div class="feed" data-feed="instagram">
         <ul class="ig-grid" data-feed-list>${ig}</ul>
         <a class="btn btn-line" href="${s.instagram.url}" target="_blank" rel="noopener">${icon('instagram')}Follow ${s.instagram.handle}</a>
-      </div>
-      <div class="feed" id="feed-tiktok" role="tabpanel" aria-labelledby="tab-tt" data-feed="tiktok" data-feed-hide>
-        <ul class="tt-grid" data-feed-list>${tt}</ul>
-        <a class="btn btn-line" href="${s.tiktok.url}" target="_blank" rel="noopener">${icon('tiktok')}Follow ${s.tiktok.handle} on TikTok</a>
-      </div>
-      <div class="feed" id="feed-facebook" role="tabpanel" aria-labelledby="tab-fb" data-feed="facebook" data-feed-hide>
-        <ul class="fb-grid" data-feed-list>${fb}</ul>
-        <a class="btn btn-line" href="${s.facebook.url}" target="_blank" rel="noopener">${icon('facebook')}Follow ${SITE.name} on Facebook</a>
       </div>
     </div>
   </div>

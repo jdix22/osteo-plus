@@ -55,7 +55,7 @@
     <div class="topbar-l"><img src="../assets/img/brand/mark-88.png" alt="" width="44" height="44"><strong>OSTEO<span>+</span> blog manager</strong></div>
     <nav class="tabs" role="tablist">
       <button role="tab" class="is-on" data-tab="posts">Blog posts</button>
-      <button role="tab" data-tab="social">Social feeds</button>
+      <button role="tab" data-tab="social">Instagram feed</button>
       <button role="tab" data-tab="settings">Settings</button>
     </nav>
     <div class="topbar-r">
@@ -78,20 +78,12 @@
     </section>
 
     <section class="tab-panel" id="tab-social" hidden>
-      <div class="panel-head"><div><h2>Social feeds</h2><p class="muted">The “OSTEO+ on social” section near the bottom of the home page.</p></div></div>
+      <div class="panel-head"><div><h2>Instagram feed</h2><p class="muted">The “OSTEO+ on Instagram” section near the bottom of the home page.</p></div></div>
       <form class="card" id="social-form">
-        <p class="muted">Until a feed is connected, the home page shows sample posts that link to the account. To show live posts, create a feed at <a href="https://behold.so" target="_blank" rel="noopener">behold.so</a>, copy its <b>Feed ID</b> (the code at the end of the feed address), and paste it below. You can also paste the full feed address.</p>
+        <p class="muted">The home page shows the latest posts from @osteoplus_ through <a href="https://behold.so" target="_blank" rel="noopener">Behold</a>. It updates by itself when the clinic posts. Only change the feed ID if you make a new feed in Behold (paste its <b>JSON</b> feed address or just the code at the end).</p>
         <div class="social-row">
-          <label class="field"><span>Instagram feed ID <small>@osteoplus_</small></span><input name="instagram" placeholder="e.g. NWiVcaJ9hRfC1Qx5Vyxl" autocomplete="off"></label>
+          <label class="field"><span>Instagram feed ID <small>@osteoplus_</small></span><input name="instagram" placeholder="e.g. p46l0vsEi0LqWT2DwDXc" autocomplete="off"></label>
           <label class="field field-sm"><span>Posts shown</span><input name="instagram_count" type="number" min="4" max="12" step="4"></label>
-        </div>
-        <div class="social-row">
-          <label class="field"><span>TikTok feed ID <small>@osteoplus_</small></span><input name="tiktok" autocomplete="off"></label>
-          <label class="field field-sm"><span>Posts shown</span><input name="tiktok_count" type="number" min="2" max="8" step="2"></label>
-        </div>
-        <div class="social-row">
-          <label class="field"><span>Facebook feed ID <small>OSTEO+</small></span><input name="facebook" autocomplete="off"></label>
-          <label class="field field-sm"><span>Posts shown</span><input name="facebook_count" type="number" min="3" max="9" step="3"></label>
         </div>
         <button class="btn" type="submit">Save feeds</button>
         <p class="status" role="status"></p>

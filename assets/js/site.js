@@ -131,60 +131,27 @@
     if (list.length) latest.innerHTML = list.map(p => OP.postCard(p, '')).join('');
   }).catch(() => {});
 
-  /* ---------- social feeds ---------- */
-  const feedTabs = $$('[data-feed-tab]');
-  feedTabs.forEach((t, i) => {
-    const pick = (tab, focus) => {
-      feedTabs.forEach(x => {
-        const on = x === tab;
-        x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1;
-        document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
-      });
-      if (focus) tab.focus();
-    };
-    t.addEventListener('click', () => pick(t));
-    t.addEventListener('keydown', e => {
-      const k = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
-      if (k) { e.preventDefault(); pick(feedTabs[(i + k + feedTabs.length) % feedTabs.length], true); }
-    });
-  });
-  $$('[data-feed-hide]').forEach(p => (p.hidden = true));
-
+  /* ---------- Instagram feed (Behold) ---------- */
   const feeds = $('.feeds');
   if (feeds) fetch(ROOT + 'data/social.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(cfg => {
-    if (!cfg) return;
-    let live = 0;
-    const tasks = ['instagram', 'tiktok', 'facebook'].map(net => {
-      const id = (cfg[net]?.behold || '').trim().replace(/^https?:\/\/feeds\.behold\.so\//, '');
-      if (!id) return null;
-      return fetch('https://feeds.behold.so/' + encodeURIComponent(id)).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(data => {
-        const posts = (Array.isArray(data) ? data : data.posts || []).filter(p => p.permalink && p.visibility !== 'hidden').slice(0, cfg[net].count || 8);
-        if (!posts.length) return;
-        renderFeed(net, posts);
-        live++;
-      }).catch(() => {});
+    const id = (cfg?.instagram?.behold || '').trim().replace(/^https?:\/\/feeds\.behold\.so\//, '');
+    if (!id) return;
+    return fetch('https://feeds.behold.so/' + encodeURIComponent(id)).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(data => {
+      const posts = (Array.isArray(data) ? data : data.posts || []).filter(p => p.permalink && p.visibility !== 'hidden').slice(0, cfg.instagram.count || 8);
+      if (posts.length) renderFeed(posts);
     });
-    Promise.all(tasks).then(() => { if (live) $('[data-feed-note]')?.remove(); });
   }).catch(() => {});
 
   const caption = p => (p.prunedCaption || p.caption || '').replace(/\s+/g, ' ').trim();
   const imgOf = p => (p.sizes?.medium?.mediaUrl) || p.thumbnailUrl || p.mediaUrl || '';
-  function renderFeed(net, posts) {
-    const list = $(`[data-feed="${net}"] [data-feed-list]`);
-    const S = OP.SITE.social[net];
-    const e = OP.esc;
-    if (net === 'instagram') list.innerHTML = posts.map(p => {
+  function renderFeed(posts) {
+    const e = OP.esc, handle = OP.SITE.social.instagram.handle;
+    const list = $('[data-feed="instagram"] [data-feed-list]');
+    list.classList.toggle('ig-six', posts.length === 6);
+    list.innerHTML = posts.map(p => {
       const cap = caption(p);
       const vid = /video|reel/i.test(p.mediaType || '');
-      return `<li><a class="ig-tile" href="${e(p.permalink)}" target="_blank" rel="noopener"><img src="${e(imgOf(p))}" alt="${e(cap ? cap.slice(0, 110) : 'Instagram post by ' + S.handle)}" loading="lazy">${vid ? `<svg class="ig-video" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>` : ''}<span class="ig-cap">${e(cap.slice(0, 140))}</span></a></li>`;
-    }).join('');
-    else if (net === 'tiktok') list.innerHTML = posts.map(p => {
-      const cap = caption(p);
-      return `<li><a class="tt-tile" href="${e(p.permalink)}" target="_blank" rel="noopener"><img src="${e(imgOf(p))}" alt="" loading="lazy"><span class="tt-play">${OP.icon('play')}</span><span class="tt-cap">${e(cap.slice(0, 90))}</span></a></li>`;
-    }).join('');
-    else list.innerHTML = posts.map(p => {
-      const cap = caption(p);
-      return `<li><article class="fb-post"><header><img src="${ROOT}assets/img/brand/osteo-plus-avatar.png" alt="" width="80" height="80"><span><b>${OP.SITE.name}</b><small>${p.timestamp ? new Date(p.timestamp).toLocaleDateString('en-CA', { month: 'long', day: 'numeric' }) : 'Facebook'}</small></span></header><p>${e(cap.slice(0, 260))}</p>${imgOf(p) ? `<a class="fb-img" href="${e(p.permalink)}" target="_blank" rel="noopener"><img src="${e(imgOf(p))}" alt="" loading="lazy"></a>` : ''}</article></li>`;
+      return `<li><a class="ig-tile" href="${e(p.permalink)}" target="_blank" rel="noopener"><img src="${e(imgOf(p))}" alt="${e(cap ? cap.slice(0, 110) : 'Instagram post by ' + handle)}" loading="lazy">${vid ? `<svg class="ig-video" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>` : ''}<span class="ig-cap">${e(cap.slice(0, 140))}</span></a></li>`;
     }).join('');
   }
 

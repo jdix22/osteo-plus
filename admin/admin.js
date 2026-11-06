@@ -553,9 +553,9 @@
     w.document.open(); w.document.write(html); w.document.close();
   });
 
-  /* ---------- social feeds ---------- */
-  const NETS = ['instagram', 'tiktok', 'facebook'];
-  const DEFAULT_COUNT = { instagram: 8, tiktok: 4, facebook: 3 };
+  /* ---------- Instagram feed ---------- */
+  const NETS = ['instagram'];
+  const DEFAULT_COUNT = { instagram: 8 };
   function fillSocial() {
     const f = $('#social-form');
     NETS.forEach(n => { f[n].value = social[n]?.behold || ''; f[n + '_count'].value = social[n]?.count || DEFAULT_COUNT[n]; });

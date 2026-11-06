@@ -6,7 +6,7 @@ Prototype: https://jdix22.github.io/osteo-plus/ (set to `noindex` until the clin
 Everything on the old site is here: all 12 services, 11 practitioners, pricing, FAQs, contact details, hours, testimonial, the 5 blog posts and the clinic's own photos. Booking stays on Jane (osteo-plus.janeapp.com); every practitioner with a Jane profile gets a direct "Book with …" link.
 
 ## What's new
-- Home: "What brings you in?" matcher (pick a concern, see matching treatments and practitioners with Book buttons), live "Open now" status, service cards with prices, team carousel, first-visit steps, latest posts, social feeds, FAQ, map.
+- Home: "What brings you in?" matcher (pick a concern, see matching treatments and practitioners with Book buttons), live "Open now" status, service cards with prices, team carousel, first-visit steps, latest posts, Instagram feed, FAQ, map.
 - A page per service and per practitioner, a services comparison table, pricing page, FAQ page, contact form.
 - SEO: real text on every page, unique titles/descriptions, structured data (clinic, services, people, blog posts, FAQs, breadcrumbs), sitemap, social preview image, fast WebP photos with descriptive names.
 - Every old Wix address still works (old service and team URLs forward to the new pages; blog post addresses are unchanged).
@@ -19,9 +19,8 @@ One-time setup (Jordan):
 2. Open https://jdix22.github.io/osteo-plus/admin/, paste the token, choose the clinic's password. The token is stored encrypted in `admin/vault.json`.
 3. Give the clinic the password (not the token).
 
-## Social feeds
-Until feeds are connected, the "OSTEO+ on social" section shows sample tiles (clinic photos) that link to the real accounts, with a small "Live posts appear here once the feeds are connected" note.
-To go live: create feeds at behold.so, then in `/admin/` > Social feeds paste each Feed ID and Publish. (Or edit `data/social.json`.)
+## Instagram feed
+The "OSTEO+ on Instagram" section near the bottom of the home page shows @osteoplus_'s latest posts from Behold (JSON feed `p46l0vsEi0LqWT2DwDXc`, set in `data/social.json`). It updates itself. Clinic photos show as a fallback if the feed can't load. To change the feed: /admin/ > Instagram feed, paste the new feed ID, Publish. (TikTok and Facebook feeds were removed at Jordan's request; their icons still link to the accounts.)
 
 ## Editing the site
 Content lives in `_src/content.js` (services, bios, prices, FAQs) and `assets/js/shared.js` (address, phone, hours, team list, Jane ids). Rebuild with `node _src/build.js`. Bump `BUILD` in shared.js on every change so browsers fetch the new CSS/JS.
