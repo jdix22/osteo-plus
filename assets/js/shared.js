@@ -108,7 +108,7 @@
   const icon = (name, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICON[name]}</svg>`;
 
   // Version stamp for CSS/JS links so browsers pick up changes (bump on every deploy).
-  const BUILD = '20261109b';
+  const BUILD = '20261109c';
 
   /* ---------- <head> ---------- */
   function head({ title, desc, path = '', root = '', image = 'assets/img/brand/og-osteo-plus.png', imageAlt, type = 'website', jsonld = [], noindex = SITE.noindex, extraHead = '' }) {

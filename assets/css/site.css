@@ -133,7 +133,7 @@ figure { margin: 0; }
 /* ---------- hero ---------- */
 .hero { background: radial-gradient(1200px 600px at 85% 20%, #2c241a 0%, transparent 60%), var(--ink); color: var(--bone); padding: clamp(48px, 7vw, 96px) 0 clamp(64px, 8vw, 110px); overflow: hidden; }
 .hero-in { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
-.hero-awards { position: absolute; top: calc(-1 * clamp(48px, 7vw, 96px) + 18px); right: var(--gut); z-index: 2; list-style: none; display: flex; gap: 10px; }
+.hero-awards { position: absolute; top: calc(-1 * clamp(48px, 7vw, 96px) + 18px); right: calc(var(--gut) - min(48px, max(12px, (100vw - 1220px) / 2 + 12px))); z-index: 2; list-style: none; display: flex; gap: 10px; }
 .hero-awards img { width: auto; height: 84px; filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .45)); transition: transform .3s var(--ease); }
 .hero-awards img:hover { transform: translateY(-2px) scale(1.04); }
 .hero-h1 { font: 400 clamp(2.4rem, 5vw, 4.1rem)/1.04 var(--serif); letter-spacing: -.015em; margin-bottom: 22px; color: var(--paper); }
