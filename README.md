@@ -34,7 +34,8 @@ Settled (Jordan, 5 Nov 2026): Dr. Flora and Thalia removed (old addresses forwar
 4. Hours show **Sunday closed** (the old site lists Mon–Sat only). Correct?
 5. The FAQ says RMT massage comes with **RMT receipts**. True for all RMTs? Do you direct-bill insurance?
 6. Steve's surname (Shelmov) and Dr. Angelica's surname (Dimita) come from Jane and the blog. OK to show? Is Sammy a Registered Massage Therapist?
-7. Your Google profile shows a 5.0 rating. Want a few Google reviews quoted on the site (with permission)?
+7. **Google reviews:** the home page shows "Rated 5.0 on Google from 120+ client reviews" (as on Google, 9 Nov 2026) with a link to the Google listing. The rating is typed in (SITE.google in shared.js), so update it if it changes. To show individual reviews, send the ones you want (and that reviewers are OK being quoted).
+9. **Award badges:** send the 2025 and 2026 badge image files the award organizer gave you, and confirm the exact award name (Instagram says "Choice Award", Facebook says "Top Choice Awards").
 8. Contact form currently opens the visitor's email app. Want it to send directly (free form service)?
 
 ## Going live on osteo-plus.ca

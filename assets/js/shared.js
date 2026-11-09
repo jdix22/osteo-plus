@@ -36,6 +36,8 @@
       tiktok: { label: 'TikTok', handle: '@osteoplus_', url: 'https://www.tiktok.com/@osteoplus_' },
       facebook: { label: 'Facebook', handle: 'OSTEO+', url: 'https://www.facebook.com/profile.php?id=61550116336816' }
     },
+    // Google Business Profile. Rating and count as shown on Google, 9 Nov 2026; update if they change.
+    google: { url: 'https://www.google.com/maps?cid=16971656537023594273', rating: '5.0', count: '120+' },
     credit: { label: 'Website designed by jdix.ca', url: 'https://jdix.ca' }
   };
 
@@ -105,7 +107,7 @@
   const icon = (name, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICON[name]}</svg>`;
 
   // Version stamp for CSS/JS links so browsers pick up changes (bump on every deploy).
-  const BUILD = '20261105e';
+  const BUILD = '20261109a';
 
   /* ---------- <head> ---------- */
   function head({ title, desc, path = '', root = '', image = 'assets/img/brand/og-osteo-plus.png', imageAlt, type = 'website', jsonld = [], noindex = SITE.noindex, extraHead = '' }) {
@@ -312,7 +314,7 @@ ${scripts(root, meta.scripts || '')}
       openingHoursSpecification: SITE.hours.filter(h => h.open).map(h => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days.map(d => days[d]), opens: h.open, closes: h.close })),
       medicalSpecialty: ['Musculoskeletal', 'PhysicalTherapy'],
       availableService: SERVICES.map(s => ({ '@type': 'MedicalTherapy', name: s.name, url: abs(s.path) })),
-      sameAs: Object.values(SITE.social).map(s => s.url),
+      sameAs: [...Object.values(SITE.social).map(s => s.url), SITE.google.url],
       potentialAction: { '@type': 'ReserveAction', target: SITE.booking, name: 'Book an appointment' }
     };
   }

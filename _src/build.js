@@ -195,7 +195,7 @@ function buildHome() {
     <div class="hero-copy">
       <p class="eyebrow eyebrow-light">${SITE.name} · ${SITE.city}, Ontario</p>
       <h1 class="hero-h1">An osteopathy clinic in Thornhill for chronic pain and <em>whole-body wellness.</em></h1>
-      <p class="hero-lede">Osteopaths, physiotherapists, an athletic therapist, RMTs, acupuncturists and a naturopathic doctor on one team, working together to help you unlock your body’s full potential.</p>
+      <p class="hero-lede">Osteopathy, Physiotherapy, Registered Massage Therapy, Acupuncture, Naturopathy and Athletic Therapy, under one roof, working together to unlock your body’s full potential.</p>
       <div class="btn-row">
         ${bookBtn(SITE.booking, 'Book appointment')}
         <a class="btn btn-line-light" href="#find">Find the right treatment ${icon('arrow')}</a>
@@ -235,7 +235,7 @@ function buildHome() {
       <figure class="hero-arch">${pic(root, 'clinic/treatment-room', 'A bright treatment room at OSTEO+ with a treatment table and plant', { lazy: false })}</figure>
       <figure class="hero-card">
         ${pic(root, 'clinic/osteo-plus-team-thornhill', 'The OSTEO+ team seated in front of the clinic’s logo wall', { lazy: false })}
-        <figcaption>The OSTEO+ team, Disera Drive</figcaption>
+        <figcaption>The OSTEO+ team in Thornhill</figcaption>
       </figure>
       <p class="open-pill" data-open-pill>${icon('clock')}<span>Mon–Thu 10–8 · Fri 10–2 · Sat 9–2</span></p>
     </div>
@@ -285,7 +285,7 @@ function buildHome() {
     </div>
     <div class="about-copy">
       <p class="eyebrow">About OSTEO+</p>
-      <h2 class="h2" id="about-h">Compassionate, whole-body care, on Disera Drive</h2>
+      <h2 class="h2" id="about-h">Compassionate, whole-body care, in Thornhill</h2>
       <p>${esc(C.ABOUT[0])}</p>
       <p>${esc(C.ABOUT[1])}</p>
       <ul class="ticks">
@@ -318,6 +318,11 @@ function buildHome() {
       <blockquote><p>${esc(C.TESTIMONIAL.text)}</p></blockquote>
       <figcaption>${pic(root, C.TESTIMONIAL.photo, '')}<span><b>${C.TESTIMONIAL.name}</b><small>First-time osteopathy client</small></span></figcaption>
     </figure>
+    <div class="g-reviews">
+      <span class="g-stars" aria-hidden="true">${"<svg viewBox=\"0 0 24 24\"><path d=\"m12 2 2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.2 5.8 20.9l1.6-7L2 9.2l7.1-.6z\"/></svg>".repeat(5)}</span>
+      <p><b>Rated ${SITE.google.rating} on Google</b><span>from ${SITE.google.count} client reviews</span></p>
+      <a class="btn btn-ink" href="${SITE.google.url}" target="_blank" rel="noopener">Read our Google reviews ${icon('arrow')}</a>
+    </div>
   </div>
 </section>
 

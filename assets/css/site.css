@@ -308,6 +308,12 @@ figure { margin: 0; }
 .quote figcaption img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; }
 .quote figcaption span { display: flex; flex-direction: column; }
 .quote figcaption small { color: var(--muted); }
+.g-reviews { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 36px; padding: 20px 24px; border: 1px solid var(--line); border-radius: var(--r); background: var(--white); }
+.g-stars { display: inline-flex; gap: 3px; }
+.g-stars svg { width: 22px; height: 22px; fill: var(--gold); }
+.g-reviews p { display: flex; flex-direction: column; margin: 0; flex: 1; min-width: 180px; line-height: 1.3; }
+.g-reviews b { font: 400 1.35rem/1.2 var(--serif); color: var(--ink); }
+.g-reviews span { color: var(--muted); font-size: .92rem; }
 
 /* steps */
 .steps { list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; counter-reset: s; }
