@@ -37,6 +37,7 @@
       facebook: { label: 'Facebook', handle: 'OSTEO+', url: 'https://www.facebook.com/profile.php?id=61550116336816' }
     },
     // Google Business Profile. Rating and count as shown on Google, 9 Nov 2026; update if they change.
+    awards: ['Canadian Choice Award Winner 2025', 'Canadian Choice Award Winner 2026'],
     google: { url: 'https://www.google.com/maps?cid=16971656537023594273', rating: '5.0', count: '120+' },
     credit: { label: 'Website designed by jdix.ca', url: 'https://jdix.ca' }
   };
@@ -107,7 +108,7 @@
   const icon = (name, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICON[name]}</svg>`;
 
   // Version stamp for CSS/JS links so browsers pick up changes (bump on every deploy).
-  const BUILD = '20261109a';
+  const BUILD = '20261109b';
 
   /* ---------- <head> ---------- */
   function head({ title, desc, path = '', root = '', image = 'assets/img/brand/og-osteo-plus.png', imageAlt, type = 'website', jsonld = [], noindex = SITE.noindex, extraHead = '' }) {
@@ -300,6 +301,7 @@ ${scripts(root, meta.scripts || '')}
     return {
       '@context': 'https://schema.org',
       '@type': ['MedicalClinic', 'LocalBusiness'],
+      award: SITE.awards,
       '@id': SITE.url + '/#clinic',
       name: SITE.name,
       alternateName: 'Osteo Plus',

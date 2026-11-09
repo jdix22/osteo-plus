@@ -192,6 +192,7 @@ function buildHome() {
   const main = `
 <section class="hero">
   <div class="wrap hero-in">
+    <ul class="hero-awards" aria-label="Awards">${SITE.awards.map(a => `<li><img src="${root}assets/img/brand/${a.toLowerCase().replace(/ winner/, '').replace(/ /g, '-')}.webp" alt="${esc(a)}" title="${esc(a)}" width="254" height="240"></li>`).join('')}</ul>
     <div class="hero-copy">
       <p class="eyebrow eyebrow-light">${SITE.name} · ${SITE.city}, Ontario</p>
       <h1 class="hero-h1">An osteopathy clinic in Thornhill for chronic pain and <em>whole-body wellness.</em></h1>
