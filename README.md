@@ -1,7 +1,7 @@
 # OSTEO+ website (prototype)
 
 Redesign of [osteo-plus.ca](https://www.osteo-plus.ca) (Wix) for OSTEO+, the osteopathy and chronic pain clinic at 10 Disera Dr, Unit 200, Thornhill ON L4J 0A7.
-Prototype: https://jdix22.github.io/osteo-plus/ (set to `noindex` until the clinic approves it).
+Live: https://www.osteo-plus.ca (GitHub Pages, repo jdix22/osteo-plus, custom domain set by the `CNAME` file). Launched 9 Nov 2026.
 
 Everything on the old site is here: all 12 services, the current team, pricing (matching Jane), FAQs, contact details, hours, testimonial, the 5 blog posts and the clinic's own photos. Booking stays on Jane (osteo-plus.janeapp.com); every practitioner with a Jane profile gets a direct "Book with …" link.
 
@@ -16,7 +16,7 @@ The clinic writes and edits posts at `/admin/` with a password. Publishing build
 
 One-time setup (Jordan):
 1. On GitHub, create a fine-grained token for `jdix22/osteo-plus` only, with **Contents: Read and write**.
-2. Open https://jdix22.github.io/osteo-plus/admin/, paste the token, choose the clinic's password. The token is stored encrypted in `admin/vault.json`.
+2. Open https://www.osteo-plus.ca/admin/, paste the token, choose the clinic's password. The token is stored encrypted in `admin/vault.json`.
 3. Give the clinic the password (not the token).
 
 ## Instagram feed
@@ -38,7 +38,9 @@ Settled (Jordan, 5 Nov 2026): Dr. Flora and Thalia removed (old addresses forwar
 9. **Award badges:** done (Canadian Choice Award Winner 2025 and 2026, top-right of the home hero; files in assets/img/brand/). Add future years to `awards` in shared.js with a matching image.
 8. Contact form currently opens the visitor's email app. Want it to send directly (free form service)?
 
-## Going live on osteo-plus.ca
-1. In `assets/js/shared.js`: `url: 'https://www.osteo-plus.ca'`, `noindex: false`. Rebuild.
-2. Host (Cloudflare Worker like Jordan's other client sites, or GitHub Pages with a custom domain) and point the domain away from Wix.
-3. Submit the sitemap in Google Search Console and claim/refresh the Google Business Profile so the hours, phone and website match the site.
+## Domain and hosting (live since 9 Nov 2026)
+- osteo-plus.ca is registered at GoDaddy, and GoDaddy runs its DNS (switched away from Wix nameservers on 9 Nov 2026).
+- Website: four A records on @ (185.199.108-111.153) and CNAME www -> jdix22.github.io. GitHub Pages serves www.osteo-plus.ca; the bare domain forwards to www.
+- Email (Google Workspace): five Google MX records (priority 10-50), SPF TXT `v=spf1 include:_spf.google.com -all`, and the google-site-verification TXT. Don't remove these.
+- Wix: the clinic can cancel the Wix website plan once the new site shows everywhere. Do not cancel or move the domain.
+- Google Search Console: add a Domain property for osteo-plus.ca and submit https://www.osteo-plus.ca/sitemap.xml (full address).

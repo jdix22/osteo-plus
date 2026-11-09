@@ -12,9 +12,9 @@
   const SITE = {
     name: 'OSTEO+',
     tagline: 'Unlock your body’s full potential',
-    // Prototype address. At launch: 'https://www.osteo-plus.ca' and NOINDEX false.
-    url: 'https://jdix22.github.io/osteo-plus',
-    noindex: true,
+    // Live on osteo-plus.ca since 9 Nov 2026 (GitHub Pages custom domain, DNS at GoDaddy).
+    url: 'https://www.osteo-plus.ca',
+    noindex: false,
     phone: '(289) 588-3124',
     tel: '+12895883124',
     email: 'info@osteo-plus.ca',
@@ -108,7 +108,7 @@
   const icon = (name, cls = 'i') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICON[name]}</svg>`;
 
   // Version stamp for CSS/JS links so browsers pick up changes (bump on every deploy).
-  const BUILD = '20261109c';
+  const BUILD = '20261109d';
 
   /* ---------- <head> ---------- */
   function head({ title, desc, path = '', root = '', image = 'assets/img/brand/og-osteo-plus.png', imageAlt, type = 'website', jsonld = [], noindex = SITE.noindex, extraHead = '' }) {
