@@ -196,7 +196,7 @@ function buildHome() {
     <div class="hero-copy">
       <p class="eyebrow eyebrow-light">${SITE.name} · ${SITE.city}, Ontario</p>
       <h1 class="hero-h1">An osteopathy clinic in Thornhill for chronic pain and <em>whole-body wellness.</em></h1>
-      <p class="hero-lede">Osteopathy, Physiotherapy, Registered Massage Therapy, Acupuncture, Naturopathy and Athletic Therapy, under one roof, working together to unlock your body’s full potential.</p>
+      <p class="hero-lede">Osteopathy, Physiotherapy, Registered Massage Therapy, Lymphatic Drainage, Acupuncture, Naturopathy and Athletic Therapy, under one roof, working together to unlock your body’s full potential.</p>
       <div class="btn-row">
         ${bookBtn(SITE.booking, 'Book appointment')}
         <a class="btn btn-line-light" href="#find">Find the right treatment ${icon('arrow')}</a>
