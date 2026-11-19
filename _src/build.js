@@ -757,7 +757,7 @@ function redirect(from, to) {
   const url = abs(to);
   write(from + '/index.html', `<!doctype html>
 <html lang="en-CA"><head><meta charset="utf-8"><title>Moved | ${SITE.name}</title>
-<meta name="robots" content="noindex"><link rel="canonical" href="${url}">
+<link rel="canonical" href="${url}">
 <meta http-equiv="refresh" content="0; url=${rootFor(from + '/')}${to}">
 </head><body><p>This page has moved to <a href="${rootFor(from + '/')}${to}">${url}</a>.</p></body></html>
 `);
